@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class DevPlayerController : MonoBehaviour
 {
-    PlayerInput playerInput;
+    DevPlayerInput playerInput;
 
     public Rigidbody2D movementRigidbody;
     public float movementSpeed;
@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         // Input
-        playerInput = new PlayerInput();
+        playerInput = new DevPlayerInput();
         playerInput.Enable();
         playerInput.Default.Jump.performed += Jump;
     }
