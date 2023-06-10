@@ -25749,6 +25749,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 1694627222}
+  walkSpeed: 0
+  moveDir: {x: 0, y: 0}
 --- !u!50 &1694627222
 Rigidbody2D:
   serializedVersion: 4
@@ -25769,7 +25771,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1694627223
 SpriteRenderer:
   m_ObjectHideFlags: 0
