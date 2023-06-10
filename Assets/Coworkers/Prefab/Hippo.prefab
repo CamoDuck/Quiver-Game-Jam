@@ -53,7 +53,10 @@ MonoBehaviour:
   followDistance: 1
   portrait: []
   coworkerName: Hippo
-  maxHealth: 0
+  maxHealth: 10
+  sprite: {fileID: 0}
+  attackDamage: 2
+  reactionType: 3
 --- !u!212 &769404978480485988
 SpriteRenderer:
   m_ObjectHideFlags: 0

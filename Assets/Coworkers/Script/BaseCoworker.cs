@@ -6,7 +6,7 @@ using System.IO;
 public class BaseCoworker : MonoBehaviour
 {
     /// CONSTANT ///
-    [SerializeField] Rigidbody2D body;
+    [SerializeField] public Rigidbody2D body;
     [SerializeField] public Rigidbody2D followTarget;
     [SerializeField] float followSpeed;
     [SerializeField] float followDistance;
@@ -14,8 +14,8 @@ public class BaseCoworker : MonoBehaviour
     [SerializeField] string coworkerName;
     [SerializeField] float maxHealth;
     public Sprite sprite;
-    protected float attackDamage;
-    protected Reaction reactionType;
+    [SerializeField] public float attackDamage;
+    [SerializeField] protected Reaction reactionType;
 
 
     /// VARYING ///
@@ -44,6 +44,8 @@ public class BaseCoworker : MonoBehaviour
 
     /// damage this coworker, return true if coworker is defeated
     public bool Damage(float value) {
+        Debug.Log(currentHealth);
+        currentHealth -= value;
         if (currentHealth <= 0) {
             Death();
             return true;
@@ -53,7 +55,8 @@ public class BaseCoworker : MonoBehaviour
 
     // called when coworker is defeated in verbal battle
     void Death() {
-
+        Debug.Log("dead");
+        gameObject.tag = "Follower";
     }
 
     /// Return the dialog options for the first dialog interaction, Always return three options
