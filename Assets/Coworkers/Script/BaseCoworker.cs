@@ -21,7 +21,9 @@ public class BaseCoworker : MonoBehaviour
     /// VARYING ///
     float currentHealth;
 
-    protected DialogChoices dialog;
+    protected DialogChoices[] joke;
+    protected DialogChoices[] happy;
+    protected DialogChoices[] sad;
 
     void Start() {
         currentHealth = maxHealth;
@@ -58,26 +60,31 @@ public class BaseCoworker : MonoBehaviour
     }
 
     /// Return the dialog options for the first dialog interaction, Always return three options
-    public DialogChoices GetInteraction() {
+    public DialogChoices[] GetInteraction() {
+        DialogChoices randomJoke = joke[Random.Range(0, joke.Length)];
+        DialogChoices randomHappy = happy[Random.Range(0, happy.Length)];
+        DialogChoices randomSad = sad[Random.Range(0, sad.Length)];
+        DialogChoices[] dialog = {randomJoke, randomHappy, randomSad};
+
         return dialog;
     }
     
     /// Return whether the given dialog option for the given dialog prompt was successful
-    public bool TryInteraction(int dialogOption) {
-        // move down the dialogue tree
-        if (dialogOption == 1) {
-            dialog = dialog.nextFirst;
-        }
-        else if (dialogOption == 2) {
-            dialog = dialog.nextSecond;      
-        }
-        else if (dialogOption == 3){
-            dialog = dialog.nextThird;
-        }
-        else {
-            Debug.LogError("Invalid dialog option");
-        }
+    // public bool TryInteraction(int dialogOption) {
+    //     // move down the dialogue tree
+    //     if (dialogOption == 1) {
+    //         dialog = dialog.nextFirst;
+    //     }
+    //     else if (dialogOption == 2) {
+    //         dialog = dialog.nextSecond;      
+    //     }
+    //     else if (dialogOption == 3){
+    //         dialog = dialog.nextThird;
+    //     }
+    //     else {
+    //         Debug.LogError("Invalid dialog option");
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 }

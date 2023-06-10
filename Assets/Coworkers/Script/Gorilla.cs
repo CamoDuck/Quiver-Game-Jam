@@ -6,18 +6,18 @@ using UnityEngine.UIElements;
 public class Gorilla : BaseCoworker
 {
     void Awake() {
-        DialogChoices[] joke = {
-			DialogChoices("I would never fight a gorilla. I heard you know King Kong Fu."),
-			DialogChoices("What does a gorilla wear when cooking?... An ape-ron."),
-			DialogChoices("Next week we have a company ice-cream day. Hope they have Chocolate-Chimp.")
+        joke = new DialogChoices[] {
+			new DialogChoices("I would never fight a gorilla. I heard you know King Kong Fu."),
+			new DialogChoices("What does a gorilla wear when cooking?... An ape-ron."),
+			new DialogChoices("Next week we have a company ice-cream day. Hope they have Chocolate-Chimp.")
 		};
-		DialogChoices[] sad = {
-			DialogChoices("Some customers issued complaints about our product pealing experience."),
-			DialogChoices("Our banana stock dropped slightly this week.")
+		sad = new DialogChoices[] {
+			new DialogChoices("Some customers issued complaints about our product pealing experience."),
+			new DialogChoices("Our banana stock dropped slightly this week.")
 		};
-		DialogChoices[] happy = {
-			DialogChoices("Gorillaz is my favorite band. Have you heard of it?"),
-			DialogChoices("In this company, we make bananas, we don't go bananas.")
+		happy = new DialogChoices[] {
+			new DialogChoices("Gorillaz is my favorite band. Have you heard of it?"),
+			new DialogChoices("In this company, we make bananas, we don't go bananas.")
 			
 		};
     }

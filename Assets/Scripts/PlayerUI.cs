@@ -27,7 +27,7 @@ public class PlayerUI : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void Damage() {
+    public void TakeDamage() {
         float value = coworker.attackDamage;
 
         currentHealth -= value;
@@ -42,10 +42,9 @@ public class PlayerUI : MonoBehaviour
     }
 
     public void onDialogClick(int choice) {
-        //coworker.TryInteraction(choice); // move to next choices
         StartCoroutine(ThrowCoworkers());
         if (coworker != null) {
-            Damage();
+            TakeDamage();
             updateChoices();
         }
     }
@@ -93,6 +92,7 @@ public class PlayerUI : MonoBehaviour
             clone.GetComponent<SpriteRenderer>().sprite = followerSprite;
             float damage = currentFollower.attackDamage;
             AttackCoworker(damage);
+            if (coworker == null) {yield break;}
 
             float displaceX = Random.Range(0, maxThrowDisplacement);
             float displaceY = Random.Range(0, maxThrowDisplacement);
@@ -118,10 +118,10 @@ public class PlayerUI : MonoBehaviour
     }
 
     void updateChoices() {
-        DialogChoices currentDialog = coworker.GetInteraction();
-        choice1Text.text = currentDialog.nextFirst.text;
-        choice2Text.text = currentDialog.nextSecond.text;
-        choice3Text.text = currentDialog.nextThird.text;
+        DialogChoices[] currentDialog = coworker.GetInteraction();
+        choice1Text.text = currentDialog[0].text;
+        choice2Text.text = currentDialog[1].text;
+        choice3Text.text = currentDialog[2].text;
     }
     void StartInteraction() {
         collider.enabled = false;
