@@ -42,9 +42,15 @@ TagManager:
   - name: Background
     uniqueID: 1464387159
     locked: 0
+  - name: DetailBack
+    uniqueID: 3384854401
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Environment
     uniqueID: 406858083
+    locked: 0
+  - name: DetailFront
+    uniqueID: 3494236691
     locked: 0
