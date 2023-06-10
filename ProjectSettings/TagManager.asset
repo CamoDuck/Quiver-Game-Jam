@@ -45,10 +45,13 @@ TagManager:
   - name: DetailBack
     uniqueID: 3384854401
     locked: 0
+  - name: EnvironmentBack
+    uniqueID: 3656236829
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Environment
+  - name: EnvironmentFront
     uniqueID: 406858083
     locked: 0
   - name: DetailFront
