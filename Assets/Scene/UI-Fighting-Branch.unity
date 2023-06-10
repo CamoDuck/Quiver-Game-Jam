@@ -123,16 +123,67 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!50 &520515374 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 7715420744504383758, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
-  m_PrefabInstance: {fileID: 6805433396557522050}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &764831416 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 2379882545224026163, guid: 7971436d445dcd149b7e177e0f415e17, type: 3}
-  m_PrefabInstance: {fileID: 2379882545952943755}
-  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &462378102
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984588933898487119, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078393866600018970, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: followTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7324930031485251657, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
+      propertyPath: m_Name
+      value: Hippo.002
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
 --- !u!4 &764831418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2379882545224026161, guid: 7971436d445dcd149b7e177e0f415e17, type: 3}
@@ -260,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 5078393866600018970, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
       propertyPath: followTarget
       value: 
-      objectReference: {fileID: 520515374}
+      objectReference: {fileID: 0}
     - target: {fileID: 7324930031485251657, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
       propertyPath: m_Name
       value: Hippo.001
@@ -384,6 +435,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2379882545224026160, guid: 7971436d445dcd149b7e177e0f415e17, type: 3}
+      propertyPath: maxHealth
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2379882545224026161, guid: 7971436d445dcd149b7e177e0f415e17, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -504,7 +559,7 @@ PrefabInstance:
     - target: {fileID: 5078393866600018970, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
       propertyPath: followTarget
       value: 
-      objectReference: {fileID: 764831416}
+      objectReference: {fileID: 0}
     - target: {fileID: 7324930031485251657, guid: 06b8f912285273d448c0d017f0cf9eb9, type: 3}
       propertyPath: m_Name
       value: Hippo

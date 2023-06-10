@@ -13,6 +13,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject throwableCoworker;
     [SerializeField] Rigidbody2D body;
     [SerializeField] new BoxCollider2D collider;
+    [SerializeField] float maxHealth;
     const float playerDamage = 2;
 
     /// VARYING ///
@@ -20,9 +21,33 @@ public class PlayerUI : MonoBehaviour
     BaseCoworker coworker; // current interacting coworker
     DialogChoices currentDialog;
 
+    float currentHealth;
+
+    void Start() {
+        currentHealth = maxHealth;
+    }
+
+    public void Damage() {
+        float value = coworker.attackDamage;
+
+        currentHealth -= value;
+        Debug.Log("player health - " + currentHealth);
+        if (currentHealth < 0) {
+            Death();
+        } 
+    }
+
+    void Death() {
+        // send to game over screen
+    }
+
     public void onDialogClick(int choice) {
         //coworker.TryInteraction(choice); // move to next choices
         StartCoroutine(ThrowCoworkers());
+        if (coworker != null) {
+            Damage();
+            updateChoices();
+        }
     }
 
     void OnTriggerEnter2D (Collider2D other) {
@@ -82,9 +107,6 @@ public class PlayerUI : MonoBehaviour
         }
         AttackCoworker(playerDamage);
 
-        if (coworker != null) {
-            updateChoices();
-        }
     }
 
 

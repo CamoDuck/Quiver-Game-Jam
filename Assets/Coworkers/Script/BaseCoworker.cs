@@ -44,7 +44,6 @@ public class BaseCoworker : MonoBehaviour
 
     /// damage this coworker, return true if coworker is defeated
     public bool Damage(float value) {
-        Debug.Log(currentHealth);
         currentHealth -= value;
         if (currentHealth <= 0) {
             Death();
@@ -55,7 +54,6 @@ public class BaseCoworker : MonoBehaviour
 
     // called when coworker is defeated in verbal battle
     void Death() {
-        Debug.Log("dead");
         gameObject.tag = "Follower";
     }
 
