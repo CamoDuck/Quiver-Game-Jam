@@ -781,8 +781,8 @@ MonoBehaviour:
   choice1Text: {fileID: 2379882545029094222}
   choice2Text: {fileID: 2379882544275079926}
   choice3Text: {fileID: 2379882545000592694}
-  collider: {fileID: 2379882545224026167}
   throwableCoworker: {fileID: 6430857928202580405, guid: 2358f23f8e9d6244a83ea8b852902c8d, type: 3}
+  body: {fileID: 2379882545224026163}
 --- !u!61 &2379882545224026167
 BoxCollider2D:
   m_ObjectHideFlags: 0

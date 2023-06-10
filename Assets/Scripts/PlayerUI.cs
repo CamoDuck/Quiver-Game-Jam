@@ -10,15 +10,20 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI choice1Text;
     [SerializeField] TextMeshProUGUI choice2Text;
     [SerializeField] TextMeshProUGUI choice3Text;
-    [SerializeField] new Collider2D collider;
     [SerializeField] GameObject throwableCoworker;
+    [SerializeField] Rigidbody2D body;
 
     /// VARYING ///
+    List<BaseCoworker> followers = new List<BaseCoworker>();
     BaseCoworker coworker; // current interacting coworker
+    DialogChoices currentDialog;
 
     public void onDialogClick(int choice) {
         StartCoroutine(ThrowCoworkers());
-        coworker.TryInteraction(choice);
+        bool isDead = coworker.TryInteraction(choice);
+        if (isDead) {
+            AddCoworker();
+        }
         updateChoices();
     }
 
@@ -29,6 +34,12 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+    void AddCoworker() {
+        followers.Add(coworker);
+        coworker.followTarget = body;
+        coworker = null;
+    }
+
     IEnumerator ThrowCoworkers() {
         Vector2 diretion = new Vector2(1,1).normalized;
         float minForceStregth = 5;
@@ -37,10 +48,24 @@ public class PlayerUI : MonoBehaviour
         float maxThrowDisplacement = 5;
         float maxWaitBetweenThrows = 0.3f;
 
-        int count = 5;
-        for (int i = 0; i < count; i++) {
+        List<BaseCoworker> coworkerSynergy = new List<BaseCoworker>();
+
+        for (int i = 0; i < followers.Count; i++) {
+            BaseCoworker follower = followers[i];
+            Reaction reactionType = follower.getReactionType();
+            if (reactionType == currentDialog.reaction) {
+                coworkerSynergy.Add(follower);
+            }
+        }
+
+        //for (int i = 0; i < coworkerSynergy.Count; i++) {
+        for (int i = 0; i < 5; i++) {
             Transform clone = Instantiate(throwableCoworker).transform;
             Rigidbody2D body = clone.GetComponent<Rigidbody2D>();
+
+            // BaseCoworker currentFollower = coworkerSynergy[i];
+            // Sprite followerSprite = currentFollower.sprite;
+            //clone.GetComponent<SpriteRenderer>().sprite = followerSprite;
 
             float displaceX = Random.Range(0, maxThrowDisplacement);
             float displaceY = Random.Range(0, maxThrowDisplacement);
@@ -57,10 +82,10 @@ public class PlayerUI : MonoBehaviour
     }
 
     void updateChoices() {
-        string[] dialog = coworker.GetInteraction();
-        choice1Text.text = dialog[0];
-        choice2Text.text = dialog[1];
-        choice3Text.text = dialog[2];
+        DialogChoices currentDialog = coworker.GetInteraction();
+        choice1Text.text = currentDialog.nextFirst.text;
+        choice2Text.text = currentDialog.nextSecond.text;
+        choice3Text.text = currentDialog.nextThird.text;
     }
     void StartInteraction() {
         UI.gameObject.SetActive(true);

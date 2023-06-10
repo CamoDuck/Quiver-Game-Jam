@@ -7,12 +7,15 @@ public class BaseCoworker : MonoBehaviour
 {
     /// CONSTANT ///
     [SerializeField] Rigidbody2D body;
-    [SerializeField] Rigidbody2D followTarget;
+    [SerializeField] public Rigidbody2D followTarget;
     [SerializeField] float followSpeed;
     [SerializeField] float followDistance;
     [SerializeField] protected Sprite[] portrait;
     [SerializeField] string coworkerName;
     [SerializeField] float maxHealth;
+    public Sprite sprite;
+    protected float attackDamage;
+    protected Reaction reactionType;
 
 
     /// VARYING ///
@@ -22,6 +25,8 @@ public class BaseCoworker : MonoBehaviour
 
     void Start() {
         currentHealth = maxHealth;
+
+        sprite = GetComponent<SpriteRenderer>().sprite;
     }
 
     void FixedUpdate() {
@@ -33,11 +38,17 @@ public class BaseCoworker : MonoBehaviour
         }
     }
     
-    /// damage this coworker
-    public void Damage(float value) {
+    public Reaction getReactionType() {
+        return reactionType;
+    }
+
+    /// damage this coworker, return true if coworker is defeated
+    public bool Damage(float value) {
         if (currentHealth <= 0) {
             Death();
+            return true;
         }
+        return false;
     }
 
     // called when coworker is defeated in verbal battle
@@ -46,10 +57,8 @@ public class BaseCoworker : MonoBehaviour
     }
 
     /// Return the dialog options for the first dialog interaction, Always return three options
-    public string[] GetInteraction() {
-        string[] dialogText = {dialog.nextFirst.text, dialog.nextSecond.text, dialog.nextThird.text};
-
-        return dialogText;
+    public DialogChoices GetInteraction() {
+        return dialog;
     }
     
     /// Return whether the given dialog option for the given dialog prompt was successful
