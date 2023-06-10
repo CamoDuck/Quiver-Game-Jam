@@ -13,11 +13,11 @@ public class Gorilla : BaseCoworker
 		};
 		DialogChoices[] sad = {
 			DialogChoices("Some customers issued complaints about our product pealing experience."),
-			DialogChoices("Our banana stock dropped slightly this week."),
+			DialogChoices("Our banana stock dropped slightly this week.")
 		};
 		DialogChoices[] happy = {
 			DialogChoices("Gorillaz is my favorite band. Have you heard of it?"),
-			DialogChoices("In this company, we make bananas, we don't go bananas."),
+			DialogChoices("In this company, we make bananas, we don't go bananas.")
 			
 		};
     }
