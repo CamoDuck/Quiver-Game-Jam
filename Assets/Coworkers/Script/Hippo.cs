@@ -7,8 +7,8 @@ public class Hippo : BaseCoworker
 {
     void Awake() {
         dialog = 
-        new DialogChoices("Start",
-            new DialogChoices("I like your style Mr.Hippo",
+        new DialogChoices("Start",Reaction.None,
+            new DialogChoices("I like your style Mr.Hippo",Reaction.None,
                 new DialogChoices("wow"),
                 new DialogChoices("cool"),
                 new DialogChoices("awesome")
