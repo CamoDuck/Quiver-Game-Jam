@@ -48,11 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be343bd74c245c7418996f210301a094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coworkerName: Hippo
-  movementRigidbody: {fileID: 7715420744504383758}
+  body: {fileID: 7715420744504383758}
   followTarget: {fileID: 0}
   followSpeed: 10
   followDistance: 1
+  portrait: []
+  coworkerName: Hippo
+  maxHealth: 0
 --- !u!212 &769404978480485988
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -172,7 +174,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1

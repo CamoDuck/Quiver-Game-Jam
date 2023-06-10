@@ -18,7 +18,6 @@ public class BaseCoworker : MonoBehaviour
     /// VARYING ///
     float currentHealth;
 
-
     protected DialogChoices dialog = 
     new DialogChoices("Start",
         new DialogChoices("dialog 1"), 
@@ -31,6 +30,7 @@ public class BaseCoworker : MonoBehaviour
     }
 
     void FixedUpdate() {
+        if (followTarget == null) {return;}
         float distFromTarget = (followTarget.position - body.position).magnitude;
         if (distFromTarget > followDistance) {
             body.MovePosition(Vector2.MoveTowards(body.position, followTarget.position, followSpeed * Time.fixedDeltaTime));
