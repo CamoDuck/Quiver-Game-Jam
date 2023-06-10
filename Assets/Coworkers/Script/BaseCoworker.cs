@@ -18,12 +18,7 @@ public class BaseCoworker : MonoBehaviour
     /// VARYING ///
     float currentHealth;
 
-    protected DialogChoices dialog = 
-    new DialogChoices("Start",
-        new DialogChoices("dialog 1"), 
-        new DialogChoices("dialog 2"), 
-        new DialogChoices("dialog 3")
-    );
+    protected DialogChoices dialog = null;
 
     void Start() {
         currentHealth = maxHealth;
