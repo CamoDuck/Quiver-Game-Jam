@@ -1,33 +1,24 @@
 {
-    "name": "PlayerInput",
+    "name": "playerInput",
     "maps": [
         {
             "name": "Default",
-            "id": "b07d8dba-b907-4618-b2f5-1953fbcd8f96",
+            "id": "b881b97a-b9e7-43d1-a281-5881d2b9a03a",
             "actions": [
                 {
                     "name": "Movement",
                     "type": "Value",
-                    "id": "e2932e78-99c7-408d-8baa-f8c2e2a3d1cf",
+                    "id": "4388ddea-b05b-41a3-a8a3-b6b55cce79e3",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "ed8a2fed-a036-4e16-8bf8-c8c7e309df97",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
-                    "name": "WASD",
-                    "id": "1c20a5ca-0937-4080-9238-566c5eb65f38",
+                    "name": "2D Vector",
+                    "id": "c92b8a2b-3ac7-4cf2-9feb-7d31648afc12",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
@@ -38,7 +29,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "88f2c072-4663-49f4-b1bf-6d9d2c02b521",
+                    "id": "fbde9a4b-1210-4ebe-8d52-447eadfd108e",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -49,8 +40,8 @@
                 },
                 {
                     "name": "down",
-                    "id": "829668b9-b54f-41b9-9324-8d7e0a7e2810",
-                    "path": "",
+                    "id": "9f629299-18f5-47b6-9681-a068bb54636b",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -60,7 +51,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "70c73162-d3e9-4d0b-8f2a-4e9db3221faf",
+                    "id": "d38273e2-97f1-4413-a66f-2e916f1f81f2",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -71,7 +62,7 @@
                 },
                 {
                     "name": "right",
-                    "id": "43a69b7a-7403-44ae-a807-cf277834b07d",
+                    "id": "149679b9-82e5-4dc6-93e9-668b18031218",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -79,39 +70,6 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "4955ad8e-42e4-4fcf-8a18-304f55d038e7",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "76530765-da0e-4f15-a2f3-908b0e0b7177",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a1f8d0f6-43dd-46c6-9f92-e91c299743ef",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }
