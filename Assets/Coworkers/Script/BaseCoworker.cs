@@ -39,7 +39,14 @@ public class BaseCoworker : MonoBehaviour
             body.MovePosition(Vector2.MoveTowards(body.position, followTarget.position, followSpeed * Time.fixedDeltaTime));
         }
     }
-    
+
+    public float getMaxHealth() {
+        return maxHealth;
+    }
+    public float getHealth() {
+        return currentHealth;
+    }
+
     public Reaction getReactionType() {
         return reactionType;
     }

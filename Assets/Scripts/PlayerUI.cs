@@ -10,6 +10,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI choice1Text;
     [SerializeField] TextMeshProUGUI choice2Text;
     [SerializeField] TextMeshProUGUI choice3Text;
+    [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI enemyHealthText;
     [SerializeField] GameObject throwableCoworker;
     [SerializeField] Rigidbody2D body;
     [SerializeField] new BoxCollider2D collider;
@@ -27,11 +29,20 @@ public class PlayerUI : MonoBehaviour
         currentHealth = maxHealth;
     }
 
+    void updateHealthUI() {
+        healthText.text = currentHealth + "/" + maxHealth;
+    }
+
+    void updateEnemyHealthUI() {
+        float enemyMaxHealth = coworker.getMaxHealth();
+        float enemyHealth = coworker.getHealth();
+        enemyHealthText.text = enemyHealth + "/" + enemyMaxHealth;
+    }
     public void TakeDamage() {
         float value = coworker.attackDamage;
 
         currentHealth -= value;
-        Debug.Log("player health - " + currentHealth);
+        updateHealthUI();
         if (currentHealth < 0) {
             Death();
         } 
@@ -112,6 +123,7 @@ public class PlayerUI : MonoBehaviour
 
     void AttackCoworker(float damage) {
         bool isDead = coworker.Damage(damage);
+        updateEnemyHealthUI();
         if (isDead) {
             EndInteraction();
         }
@@ -125,8 +137,10 @@ public class PlayerUI : MonoBehaviour
     }
     void StartInteraction() {
         collider.enabled = false;
-        UI.gameObject.SetActive(true);
+        updateHealthUI();
+        updateEnemyHealthUI();
         updateChoices();
+        UI.gameObject.SetActive(true);
     }
 
 
