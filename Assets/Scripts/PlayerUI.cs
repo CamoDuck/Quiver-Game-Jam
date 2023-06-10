@@ -26,10 +26,8 @@ public class PlayerUI : MonoBehaviour
     }
 
     void OnTriggerEnter2D (Collider2D other) {
-        Debug.Log(other);
         if (other.tag == "Coworker") {
             coworker = other.GetComponent<BaseCoworker>();
-            Debug.Log("ran");
             StartInteraction();
         }
     }
@@ -41,7 +39,6 @@ public class PlayerUI : MonoBehaviour
         choice3Text.text = dialog[2];
     }
     void StartInteraction() {
-        Debug.Log("start");
         UI.gameObject.SetActive(true);
         updateChoices();
 
