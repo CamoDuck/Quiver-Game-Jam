@@ -5,23 +5,13 @@ using UnityEngine.UIElements;
 
 public class Hippo : BaseCoworker
 {
-    new public string[] GetInteraction(int index)
-    {
-        if (index == 0) {
-            string[] dialog = {
-                "I am a happy hippo",
-                "I am an angry hippo",
-                "I am a hungry hippo",
-            };
-            return dialog;
-        }
-        else {
-            string[] dialog = {
-                "MISSING DIALOG",
-                "MISSING DIALOG",
-                "MISSING DIALOG",
-            };
-            return dialog;
-        }
+    void Awake() {
+        dialog = 
+        new DialogChoices("Start",
+            new DialogChoices("I like your style Mr.Hippo"), 
+            new DialogChoices("Did you know bread tastes like chicken"), 
+            new DialogChoices("Wanna hear a knock knock joke?")
+        );
     }
+    
 }

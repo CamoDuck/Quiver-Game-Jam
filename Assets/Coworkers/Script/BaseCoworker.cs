@@ -1,37 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class BaseCoworker : MonoBehaviour
 {
-    public Sprite[] portrait;
-    
-    public string coworkerName;
+    /// CONSTANT ///
+    [SerializeField] Rigidbody2D body;
+    [SerializeField] Rigidbody2D followTarget;
+    [SerializeField] float followSpeed;
+    [SerializeField] float followDistance;
+    [SerializeField] protected Sprite[] portrait;
+    [SerializeField] string coworkerName;
+    [SerializeField] float maxHealth;
 
-    public Rigidbody2D movementRigidbody;
 
-    public Rigidbody2D followTarget;
-    public float followSpeed;
-    public float followDistance;
+    /// VARYING ///
+    float currentHealth;
 
-    void FixedUpdate()
-    {
-        if ((followTarget.position - movementRigidbody.position).sqrMagnitude > followDistance) {
-            movementRigidbody.MovePosition(Vector2.MoveTowards(movementRigidbody.position, followTarget.position, followSpeed * Time.fixedDeltaTime));
+
+    protected DialogChoices dialog = 
+    new DialogChoices("Start",
+        new DialogChoices("dialog 1"), 
+        new DialogChoices("dialog 2"), 
+        new DialogChoices("dialog 3")
+    );
+
+    void Start() {
+        currentHealth = maxHealth;
+    }
+
+    void FixedUpdate() {
+        float distFromTarget = (followTarget.position - body.position).magnitude;
+        if (distFromTarget > followDistance) {
+            body.MovePosition(Vector2.MoveTowards(body.position, followTarget.position, followSpeed * Time.fixedDeltaTime));
         }
     }
     
-    public string[] GetInteraction(int index)
-    {
-        // Return the dialog options for the first dialog interaction
-        // Always return three options
-        string[] defaultDialog = {"dialog 1", "dialog 2", "dialog 3"};
-        return defaultDialog;
+    /// damage this coworker
+    public void Damage(float value) {
+
+        if (currentHealth <= 0) {
+            Death();
+        }
+    }
+
+    // called when coworker is defeated in verbal battle
+    void Death() {
+
+    }
+
+    /// Return the dialog options for the first dialog interaction, Always return three options
+    public string[] GetInteraction() {
+        string[] dialogText = {dialog.nextFirst.text, dialog.nextSecond.text, dialog.nextThird.text};
+
+        return dialogText;
     }
     
-    public bool TryInteraction(int index, int dialogOption)
-    {
-        // Return whether the given dialog option for the given dialog prompt was successful
+    /// Return whether the given dialog option for the given dialog prompt was successful
+    public bool TryInteraction(int dialogOption) {
+        // move down the dialogue tree
+        if (dialogOption == 1) {
+            dialog = dialog.nextFirst;
+        }
+        else if (dialogOption == 2) {
+            dialog = dialog.nextSecond;      
+        }
+        else if (dialogOption == 3){
+            dialog = dialog.nextThird;
+        }
+        else {
+            Debug.LogError("Invalid dialog option");
+        }
+
         return false;
     }
 }
