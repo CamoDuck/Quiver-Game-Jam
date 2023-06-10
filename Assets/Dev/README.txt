@@ -1,1 +1,0 @@
-Contained here are samples used for reference only. DO NOT DIRECTLY USE FOR JAM
