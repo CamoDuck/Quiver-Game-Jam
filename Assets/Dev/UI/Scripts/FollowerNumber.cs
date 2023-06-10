@@ -8,6 +8,8 @@ using TMPro;
 public class FollowerNumber : MonoBehaviour
 {
     // this code just displays the number of followers
+    // used by HUDCanvas/FollowerAmount
+    // not in use right now
 
 
     public int followerCount; // replace this with follower count in different script?
