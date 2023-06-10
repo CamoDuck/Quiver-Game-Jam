@@ -15,11 +15,12 @@ public class PlayerMovement : MonoBehaviour
         playerInput = new PlayerInput();
         playerInput.Enable();
     }
-    void Start() {
 
+    void FixedUpdate() {
+        Move();
     }
 
-    void Update() {
+    void Move() {
         Vector2 movementVector = playerInput.Default.Movement.ReadValue<Vector2>();
         body.velocity = movementVector * walkSpeed;
     }
