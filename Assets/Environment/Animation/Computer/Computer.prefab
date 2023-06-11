@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5460489856506599187}
   - component: {fileID: 5324203481261007975}
-  - component: {fileID: 6661513561042151263}
+  - component: {fileID: 48633841996221745}
   m_Layer: 0
   m_Name: Computer
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6661513561042151263
+--- !u!95 &48633841996221745
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ Animator:
   m_GameObject: {fileID: 5601944006132203520}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 65901668b26112440a53c22a56cbb261, type: 2}
+  m_Controller: {fileID: 9100000, guid: c6b06bd5766b4fc4ab9f337887eae280, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

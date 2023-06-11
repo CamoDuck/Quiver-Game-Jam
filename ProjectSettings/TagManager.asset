@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Coworker
   - Follower
+  - DetailProp
   layers:
   - Default
   - TransparentFX
