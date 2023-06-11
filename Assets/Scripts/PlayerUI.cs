@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] GameObject dialogueBox;
     [SerializeField] Canvas UI;
-    Canvas HUD;
     RectTransform choice1Button;
     RectTransform choice2Button;
     RectTransform choice3Button;
     [SerializeField] TextMeshProUGUI choice1Text;
     TextMeshProUGUI choice2Text;
     TextMeshProUGUI choice3Text;
+    
 
     /// FOR UI TRANSITION ///
     [SerializeField] GameObject playerPortraitMove;
@@ -25,23 +26,26 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject healthBox;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
+    [SerializeField] CanvasGroup dialogueCanvasGroup; // new
 
+ 
 
 
     RectTransform dialogBox;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
+    [SerializeField] TextMeshProUGUI enemyMaxHealthText; // new
     [SerializeField] Image enemyPortrait; 
     Image playerPortrait;
 
     TextMeshProUGUI dialogTextbox;
-    TextMeshProUGUI HUDHealthText;
     [SerializeField] GameObject throwableCoworker;
     [SerializeField] Rigidbody2D body;
     [SerializeField] new BoxCollider2D collider;
     [SerializeField] float maxHealth;
     const float playerDamage = 2;
     [HideInInspector] public PlayerMovement moveScript;
+    public GameOverScene gameOverScreen; 
 
     /// VARYING ///
     List<BaseCoworker> followers = new List<BaseCoworker>();
@@ -55,9 +59,9 @@ public class PlayerUI : MonoBehaviour
 
         moveScript = GetComponent<PlayerMovement>();
 
-        HUD = transform.Find("OverworldHUD").GetComponent<Canvas>();
+        // HUD = transform.Find("OverworldHUD").GetComponent<Canvas>();
 
-        HUDHealthText = HUD.transform.Find("Anxiety Amount").GetComponent<TextMeshProUGUI>();
+        // HUDHealthText = HUD.transform.Find("Anxiety Amount").GetComponent<TextMeshProUGUI>();
 
         choice1Button = (RectTransform)UI.transform.Find("Choice1");
         choice2Button = (RectTransform)UI.transform.Find("Choice2");
@@ -161,19 +165,20 @@ public class PlayerUI : MonoBehaviour
 
     }
 
-    public void addHealth(int value) {
-        currentHealth += Mathf.Clamp(value, 0, maxHealth);
+    public void addHealth(float value) {
+        currentHealth = Mathf.Clamp(value+currentHealth, 0, maxHealth);
+        updateHealthUI();
     }
 
     void updateHealthUI() {
-        healthText.text = (maxHealth - currentHealth) + "/" + maxHealth;
-        HUDHealthText.text = (maxHealth - currentHealth) + " ---- " + maxHealth;
+        healthText.text = (maxHealth - currentHealth).ToString();
     }
 
     void updateEnemyHealthUI() {
         float enemyMaxHealth = coworker.getMaxHealth();
         float enemyHealth = coworker.getHealth();
-        enemyHealthText.text = (enemyMaxHealth - enemyHealth) + "/" + enemyMaxHealth;
+        enemyHealthText.text = (enemyHealth).ToString();
+        enemyMaxHealthText.text = "---- " + enemyMaxHealth.ToString();
     }
     public void TakeDamage() {
         float value = coworker.attackDamage;
@@ -188,7 +193,7 @@ public class PlayerUI : MonoBehaviour
 
     void Death() {
         // send to game over screen
-        
+        SceneManager.LoadScene("GameOver");
     }
 
     int checkEffective(int choice) {
@@ -254,11 +259,20 @@ public class PlayerUI : MonoBehaviour
         Sprite sprite = coworker.getPortraitSprite(choice);
         enemyPortrait.sprite = sprite;
     }
-    void EndInteraction() {
+    IEnumerator EndInteraction() {
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
         followers.Add(coworker);
         coworker = null;
+        int i = 0;
+        yield return new WaitForSeconds(0.3f);
+        while(i < 60)
+        {
+            dialogueCanvasGroup.alpha -= 0.04f;
+            i++;
+            yield return new WaitForEndOfFrame();
+        }
         UI.transform.gameObject.SetActive(false);
+        dialogueCanvasGroup.alpha = 1;
         collider.enabled = true;
         setMovementEnabled(true);
     }
@@ -325,7 +339,7 @@ public class PlayerUI : MonoBehaviour
         }
 
         if (isDead) {
-            EndInteraction();
+            StartCoroutine(EndInteraction());
         }
     }
 
