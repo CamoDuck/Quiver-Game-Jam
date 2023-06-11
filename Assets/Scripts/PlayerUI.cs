@@ -23,6 +23,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject choice3Box;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
+    [SerializeField] CanvasGroup dialogueCanvasGroup;
 
 
 
@@ -192,13 +193,23 @@ public class PlayerUI : MonoBehaviour
         Sprite sprite = coworker.getPortraitSprite(choice);
         enemyPortrait.sprite = sprite;
     }
-    void EndInteraction() {
+    IEnumerator EndInteraction() {
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
         followers.Add(coworker);
         coworker = null;
+        int i = 0;
+        yield return new WaitForSeconds(0.3f);
+        while(i < 60)
+        {
+            dialogueCanvasGroup.alpha -= 0.04f;
+            i++;
+            yield return new WaitForEndOfFrame();
+        }
         UI.transform.gameObject.SetActive(false);
+        dialogueCanvasGroup.alpha = 1;
         collider.enabled = true;
         GetComponent<PlayerMovement>().playerCanMove = true;
+        
     }
 
     IEnumerator ThrowCoworkers() {
@@ -263,7 +274,7 @@ public class PlayerUI : MonoBehaviour
         }
 
         if (isDead) {
-            EndInteraction();
+            StartCoroutine(EndInteraction());
         }
     }
 
