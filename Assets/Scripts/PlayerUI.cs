@@ -55,6 +55,8 @@ public class PlayerUI : MonoBehaviour
     DialogChoices currentDialog;
 
     float currentHealth;
+    const float anxietyThreshold = 50.0f;
+    const float musicDelay = 1.0f; //Seconds
 
     void Start() {
         currentHealth = maxHealth;
@@ -191,8 +193,8 @@ public class PlayerUI : MonoBehaviour
         if (currentHealth < 0) {
             Death();
         }
-        else if (currentHealth > 50 && m_PlayerAudio.isPlaying != "ANTY") {
-            m_PlayerAudio.PlayAnxiety(1.0f);
+        else if (currentHealth < anxietyThreshold && m_PlayerAudio.isPlaying != "ANTY") {
+            m_PlayerAudio.PlayAnxiety(musicDelay);
         }
     }
 
@@ -268,7 +270,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     IEnumerator EndInteraction() {
-        m_PlayerAudio.PlayBackground(1.0f);
+        m_PlayerAudio.PlayBackground(musicDelay);
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
         followers.Add(coworker);
         coworker = null;
@@ -356,16 +358,15 @@ public class PlayerUI : MonoBehaviour
     {
         setMovementEnabled(false);
         collider.enabled = false;
-        if (currentHealth > 50) {
-            m_PlayerAudio.PlayAnxiety(1.0f);
+        if (currentHealth < anxietyThreshold) {
+            m_PlayerAudio.PlayAnxiety(musicDelay);
         }
         else {
-            float btlRand = Random.Range(0.0f, 1.0f);
-            if (btlRand > 0.5f) {
-                m_PlayerAudio.PlayBattle1(1.0f);
+            if (Random.Range(0.0f, 1.0f) > 0.5f) {
+                m_PlayerAudio.PlayBattle1(musicDelay);
             }
             else {
-                m_PlayerAudio.PlayBattle2(1.0f);
+                m_PlayerAudio.PlayBattle2(musicDelay);
             }
         }
         updateHealthUI();
