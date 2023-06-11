@@ -7,21 +7,40 @@ public class PlayerMovement : MonoBehaviour
     /// CONSTANT ///
     PlayerInput playerInput;
     [SerializeField] Rigidbody2D body;
-    const float walkSpeed = 5;
+    public float walkSpeed;
+    [HideInInspector]
+    public Vector2 moveDir; 
 
     /// VARYING ///
+
+    void start() {
+        body = GetComponent<Rigidbody2D>();
+
+    }
+
+    void Update(){
+
+        InputManagement();
+
+    }
 
     void Awake() {
         playerInput = new PlayerInput();
         playerInput.Enable();
     }
 
-    void FixedUpdate() {
+    void InputManagement() {
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        moveDir = new Vector2(moveX, moveY).normalized; 
+    }
+
+    void FixedUpdate(){
         Move();
     }
 
     void Move() {
-        Vector2 movementVector = playerInput.Default.Movement.ReadValue<Vector2>();
-        body.velocity = movementVector * walkSpeed;
+        body.velocity = new Vector2 (moveDir.x * walkSpeed, moveDir.y * walkSpeed);
     }
 }
