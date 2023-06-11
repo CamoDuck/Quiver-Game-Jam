@@ -185,7 +185,7 @@ public class PlayerUI : MonoBehaviour
         StartCoroutine(shakePortrait(true));
         currentHealth -= value;
         updateHealthUI();
-        if (currentHealth < 96) {
+        if (currentHealth <= 0) {
             Death();
         } 
     }
