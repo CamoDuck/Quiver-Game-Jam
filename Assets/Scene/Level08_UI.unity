@@ -2912,7 +2912,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"this is some witty dialogue"'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b926340fe3a7b24c9be844618e915da, type: 2}
   m_sharedMaterial: {fileID: -2079990697099863705, guid: 3b926340fe3a7b24c9be844618e915da, type: 2}
@@ -30382,7 +30382,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"choice 1"'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b926340fe3a7b24c9be844618e915da, type: 2}
   m_sharedMaterial: {fileID: -2079990697099863705, guid: 3b926340fe3a7b24c9be844618e915da, type: 2}
@@ -30620,7 +30620,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"choice 2"'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b926340fe3a7b24c9be844618e915da, type: 2}
   m_sharedMaterial: {fileID: -2079990697099863705, guid: 3b926340fe3a7b24c9be844618e915da, type: 2}
@@ -31057,7 +31057,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '"choice 3"'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3b926340fe3a7b24c9be844618e915da, type: 2}
   m_sharedMaterial: {fileID: -2079990697099863705, guid: 3b926340fe3a7b24c9be844618e915da, type: 2}
@@ -35218,6 +35218,12 @@ MonoBehaviour:
   choice3Text: {fileID: 1602260466}
   healthText: {fileID: 1034709425}
   enemyHealthText: {fileID: 966325583}
+  dialogueBox: {fileID: 257346503}
+  choice1Box: {fileID: 0}
+  choice2Box: {fileID: 0}
+  choice3Box: {fileID: 0}
+  healthBox: {fileID: 0}
+  enemyHealthBox: {fileID: 0}
   throwableCoworker: {fileID: 6430857928202580405, guid: 2358f23f8e9d6244a83ea8b852902c8d, type: 3}
   body: {fileID: 1928383668}
   collider: {fileID: 1928383665}
