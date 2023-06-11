@@ -313,7 +313,7 @@ public class PlayerUI : MonoBehaviour
     void AttackCoworker(float damage, bool playAnimation=false) {
         bool isDead = coworker.Damage(damage);
         updateEnemyHealthUI();
-        
+
         if (playAnimation) {
             StartCoroutine(shakePortrait(false));
         }
