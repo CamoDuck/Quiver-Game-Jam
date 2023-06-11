@@ -21,7 +21,6 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject choice1Box;
     [SerializeField] GameObject choice2Box;
     [SerializeField] GameObject choice3Box;
-    [SerializeField] GameObject healthBox;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
 
@@ -46,7 +45,7 @@ public class PlayerUI : MonoBehaviour
     float currentHealth;
 
     void Start() {
-        currentHealth = maxHealth;
+        currentHealth = 0;
 
         choice1Button = (RectTransform)UI.transform.Find("Choice1");
         choice2Button = (RectTransform)UI.transform.Find("Choice2");
@@ -149,7 +148,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     void updateHealthUI() {
-        healthText.text = (maxHealth - currentHealth) + "/" + maxHealth;
+        healthText.text = (currentHealth).ToString();
     }
 
     void updateEnemyHealthUI() {
@@ -161,9 +160,9 @@ public class PlayerUI : MonoBehaviour
         float value = coworker.attackDamage;
 
         StartCoroutine(shakePortrait(true));
-        currentHealth -= value;
+        currentHealth += value;
         updateHealthUI();
-        if (currentHealth < 0) {
+        if (currentHealth >= 100) {
             Death();
         } 
     }
@@ -279,7 +278,6 @@ public class PlayerUI : MonoBehaviour
         StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.0f));
         StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.05f));
         StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.25f));
-        StartCoroutine(MoveToDesiredPosition(healthBox, 0.05f));
         StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.25f));
         StartCoroutine(MoveToDesiredPosition(choice1Box, 0.7f));
         StartCoroutine(MoveToDesiredPosition(choice2Box, 0.85f));

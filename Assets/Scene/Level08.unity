@@ -14706,11 +14706,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2379882544952586067}
---- !u!1 &1018378476 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6727889466176046628, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
-  m_PrefabInstance: {fileID: 6014966474684435020}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1057143543
 GameObject:
   m_ObjectHideFlags: 0
@@ -34650,7 +34645,7 @@ PrefabInstance:
     - target: {fileID: 8250170875064493342, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: healthBox
       value: 
-      objectReference: {fileID: 1018378476}
+      objectReference: {fileID: 712416352}
     - target: {fileID: 8250170875064493342, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: choice1Box
       value: 
@@ -34663,6 +34658,10 @@ PrefabInstance:
       propertyPath: choice3Box
       value: 
       objectReference: {fileID: 850759007}
+    - target: {fileID: 8250170875064493342, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: healthText
+      value: 
+      objectReference: {fileID: 712416354}
     - target: {fileID: 8250170875064493342, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: dialogueBox
       value: 
