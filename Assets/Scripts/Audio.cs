@@ -26,7 +26,7 @@ public class Audio : MonoBehaviour
 
 	private void PlayAnxietyAfter() { m_Anxiety.Play(); }
 
-	void PlayBackground(float after=0.0f)
+	public void PlayBackground(float after=0.0f)
 	{
 		m_Battle1.Stop();
 		m_Battle2.Stop();
@@ -35,7 +35,7 @@ public class Audio : MonoBehaviour
 		Invoke(nameof(PlayBGAfter), after);
 	}
 
-	void PlayBattle1(float after=0.0f)
+	public void PlayBattle1(float after=0.0f)
 	{
 		m_Battle2.Stop();
 		m_Anxiety.Stop();
@@ -45,7 +45,7 @@ public class Audio : MonoBehaviour
 		Invoke(nameof(PlayBattle1After), after);
 	}
 
-	void PlayBattle2(float after=0.0f)
+	public void PlayBattle2(float after=0.0f)
 	{
 		m_Battle1.Stop();
 		m_Anxiety.Stop();
@@ -55,7 +55,7 @@ public class Audio : MonoBehaviour
 		Invoke(nameof(PlayBattle2After), after);
 	}
 	
-	void PlayAnxiety(float after=0.0f)
+	public void PlayAnxiety(float after=0.0f)
 	{
 		m_Battle1.Stop();
 		m_Battle2.Stop();
@@ -65,12 +65,12 @@ public class Audio : MonoBehaviour
 		Invoke(nameof(PlayAnxietyAfter), after);
 	}
 
-	void PlayDialogue()
+	public void PlayDialogue()
 	{
 		m_Dialogue.Play();
 	}
 
-	void PlaySelect()
+	public void PlaySelect()
 	{
 		m_Select.Play();
 	}

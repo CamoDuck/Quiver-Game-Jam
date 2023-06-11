@@ -6,6 +6,8 @@ using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
+    public Audio m_PlayerAudio;
+    
     [SerializeField] GameObject dialogueBox;
     [SerializeField] Canvas UI;
     RectTransform choice1Button;
@@ -199,6 +201,8 @@ public class PlayerUI : MonoBehaviour
     }
 
     public void onDialogClick(int choice) {
+        m_PlayerAudio.PlaySelect(); //Audio
+
         int Effectiveness = checkEffective(choice); // 0-2
         switch (Effectiveness) {
             case 0:
@@ -215,7 +219,7 @@ public class PlayerUI : MonoBehaviour
         if (Effectiveness >= 1) {
             StartCoroutine(ThrowCoworkers());
         }
-
+        
         StartCoroutine(buttonAnimation(choice));
         if (coworker != null) {
             updateEnemyPortrait((Reaction) (choice-1));
@@ -239,6 +243,7 @@ public class PlayerUI : MonoBehaviour
         enemyPortrait.sprite = sprite;
     }
     IEnumerator EndInteraction() {
+        m_PlayerAudio.PlayBackground(1.0f);
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
         followers.Add(coworker);
         coworker = null;
@@ -327,6 +332,12 @@ public class PlayerUI : MonoBehaviour
     {
         GetComponent<PlayerMovement>().playerCanMove = false;
         collider.enabled = false;
+        if (currentHealth > 50) {
+            m_PlayerAudio.PlayAnxiety(1.0f);
+        }
+        else {
+            m_PlayerAudio.PlayBattle1(1.0f);
+        }
         updateHealthUI();
         updateEnemyHealthUI();
         updateEnemyPortrait(Reaction.Happy);
@@ -359,6 +370,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     void updateChoices() {
+        m_PlayerAudio.PlayDialogue(); //Audio
         DialogChoices[] currentDialog = coworker.GetInteraction();
         choice1Text.text = currentDialog[0].text;
         choice2Text.text = currentDialog[1].text;
