@@ -7,12 +7,31 @@ using TMPro;
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] Canvas UI;
+    RectTransform choice1Button;
+    RectTransform choice2Button;
+    RectTransform choice3Button;
     [SerializeField] TextMeshProUGUI choice1Text;
-    [SerializeField] TextMeshProUGUI choice2Text;
-    [SerializeField] TextMeshProUGUI choice3Text;
+    TextMeshProUGUI choice2Text;
+    TextMeshProUGUI choice3Text;
+
+    /// FOR UI TRANSITION ///
+    [SerializeField] GameObject dialogueBox;
+    [SerializeField] GameObject playerPortraitMove;
+    [SerializeField] GameObject enemyPortraitMove;
+    [SerializeField] GameObject choice1Box;
+    [SerializeField] GameObject choice2Box;
+    [SerializeField] GameObject choice3Box;
+    [SerializeField] GameObject healthBox;
+    [SerializeField] GameObject enemyHealthBox;
+    [SerializeField] GameObject fadeOverlay;
+
+
+
+    RectTransform dialogBox;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
     [SerializeField] Image enemyPortrait; 
+    Image playerPortrait;
     [SerializeField] GameObject throwableCoworker;
     [SerializeField] Rigidbody2D body;
     [SerializeField] new BoxCollider2D collider;
@@ -28,20 +47,120 @@ public class PlayerUI : MonoBehaviour
 
     void Start() {
         currentHealth = maxHealth;
+
+        choice1Button = (RectTransform)UI.transform.Find("Choice1");
+        choice2Button = (RectTransform)UI.transform.Find("Choice2");
+        choice3Button = (RectTransform)UI.transform.Find("Choice3");
+
+        choice1Text = choice1Button.GetComponentInChildren<TextMeshProUGUI>();
+        choice2Text = choice2Button.GetComponentInChildren<TextMeshProUGUI>();
+        choice3Text = choice3Button.GetComponentInChildren<TextMeshProUGUI>();
+
+        dialogBox = (RectTransform)UI.transform.Find("DialogueBox");
+        playerPortrait = UI.transform.Find("PlayerPortrait").GetComponent<Image>();
+
+    }
+
+    IEnumerator buttonAnimation(int choice) {
+        const float animationDuration = 0.5f;
+        const float totalSpin = 360; // degrees
+        float animationTimer = animationDuration;
+
+        RectTransform button;
+        if (choice == 1) {
+            button = choice1Button;
+            choice2Button.gameObject.SetActive(false);
+            choice3Button.gameObject.SetActive(false);
+        }
+        else if (choice == 2) {
+            button = choice2Button;
+            choice1Button.gameObject.SetActive(false);
+            choice3Button.gameObject.SetActive(false);
+        }
+        else {
+            button = choice3Button;
+            choice1Button.gameObject.SetActive(false);
+            choice2Button.gameObject.SetActive(false);
+        }
+
+        Vector3 originalRotation = button.eulerAngles;
+        Vector3 originalScale = button.localScale;
+
+        while (animationTimer > 0) {
+            float dt = Time.fixedDeltaTime;
+
+            float angle = dt * totalSpin;
+            button.Rotate(0,0, angle);
+
+            Vector3 scaleDownAmount = Vector3.one * (dt / animationDuration);
+            button.localScale = button.localScale - scaleDownAmount;
+
+            animationTimer -= dt;
+
+            yield return new WaitForFixedUpdate();
+        }
+        button.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.1f);
+
+        button.eulerAngles = originalRotation;
+        button.localScale = originalScale;
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.0f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.15f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 0.3f));
+        choice1Button.gameObject.SetActive(true);
+        choice2Button.gameObject.SetActive(true);
+        choice3Button.gameObject.SetActive(true);
+
+    }
+
+    IEnumerator shakePortrait(bool shakePlayer) {
+        const float animationDuration = 0.2f;
+        const float minShakeStrength = 250f;
+        const float maxShakeStrength = 300;
+        Vector2 shakeDirection = new Vector2(1,Random.Range(-1f,0)).normalized;
+        float animationTimer = animationDuration;
+
+        RectTransform portrait;
+        if (shakePlayer) {
+            portrait = playerPortrait.rectTransform;
+            shakeDirection = new Vector2(-shakeDirection.x,shakeDirection.y);
+        }
+        else {
+            portrait = enemyPortrait.rectTransform;
+        }
+
+        Vector2 originalPos = portrait.position;
+        float shakeStrength = Random.Range(minShakeStrength, maxShakeStrength);
+
+        while (animationTimer > 0) {
+            float dt = Time.deltaTime;
+
+            Vector2 shakeAmount = shakeDirection * shakeStrength * dt;
+            shakeAmount = animationTimer > animationDuration/2? shakeAmount: -shakeAmount;
+            portrait.Translate(shakeAmount);
+
+            animationTimer -= dt;
+            yield return new WaitForFixedUpdate();
+        }
+
+        portrait.position = originalPos;
+
     }
 
     void updateHealthUI() {
-        healthText.text = currentHealth + "/" + maxHealth;
+        healthText.text = (maxHealth - currentHealth) + "/" + maxHealth;
     }
 
     void updateEnemyHealthUI() {
         float enemyMaxHealth = coworker.getMaxHealth();
         float enemyHealth = coworker.getHealth();
-        enemyHealthText.text = enemyHealth + "/" + enemyMaxHealth;
+        enemyHealthText.text = (enemyMaxHealth - enemyHealth) + "/" + enemyMaxHealth;
     }
     public void TakeDamage() {
         float value = coworker.attackDamage;
 
+        StartCoroutine(shakePortrait(true));
         currentHealth -= value;
         updateHealthUI();
         if (currentHealth < 0) {
@@ -55,6 +174,7 @@ public class PlayerUI : MonoBehaviour
 
     public void onDialogClick(int choice) {
         StartCoroutine(ThrowCoworkers());
+        StartCoroutine(buttonAnimation(choice));
         if (coworker != null) {
             updateEnemyPortrait((Reaction) (choice-1));
             TakeDamage();
@@ -65,7 +185,7 @@ public class PlayerUI : MonoBehaviour
     void OnTriggerEnter2D (Collider2D other) {
         if (other.tag == "Coworker") {
             coworker = other.GetComponent<BaseCoworker>();
-            StartInteraction();
+            StartCoroutine(InteractionTransition(1));
         }
     }
 
@@ -79,6 +199,7 @@ public class PlayerUI : MonoBehaviour
         coworker = null;
         UI.transform.gameObject.SetActive(false);
         collider.enabled = true;
+        GetComponent<PlayerMovement>().playerCanMove = true;
     }
 
     IEnumerator ThrowCoworkers() {
@@ -128,18 +249,59 @@ public class PlayerUI : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
         if (coworker != null) {
-            AttackCoworker(playerDamage);
+            AttackCoworker(playerDamage, true);
         }
 
     }
 
 
-    void AttackCoworker(float damage) {
+    void AttackCoworker(float damage, bool playAnimation=false) {
         bool isDead = coworker.Damage(damage);
         updateEnemyHealthUI();
+        
+        if (playAnimation) {
+            StartCoroutine(shakePortrait(false));
+        }
+
         if (isDead) {
             EndInteraction();
         }
+    }
+
+    IEnumerator InteractionTransition(int reverse)
+    {
+        GetComponent<PlayerMovement>().playerCanMove = false;
+        collider.enabled = false;
+        updateHealthUI();
+        updateEnemyHealthUI();
+        updateEnemyPortrait(Reaction.Happy);
+        updateChoices();
+        StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.0f));
+        StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.05f));
+        StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.25f));
+        StartCoroutine(MoveToDesiredPosition(healthBox, 0.05f));
+        StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.25f));
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.7f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.85f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 1.0f));
+        //fadeOverlay.gameObject.SetActive(true);
+        UI.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.8f);
+    }
+
+    IEnumerator MoveToDesiredPosition(GameObject obj, float delay)
+    {
+        Vector2 desiredPos = new Vector2(obj.GetComponent<RectTransform>().anchoredPosition.x, obj.GetComponent<RectTransform>().anchoredPosition.y);
+
+        obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(obj.GetComponent<RectTransform>().anchoredPosition.x, obj.GetComponent<RectTransform>().anchoredPosition.y - 500);
+        yield return new WaitForSeconds(delay);
+        while (obj.GetComponent<RectTransform>().anchoredPosition.y < (desiredPos.y - 4))
+        {
+            Vector2 interpolatedPosition = Vector2.Lerp(obj.GetComponent<RectTransform>().anchoredPosition, desiredPos, Time.deltaTime * 7.0f);
+            obj.GetComponent<RectTransform>().anchoredPosition = interpolatedPosition; ;
+            yield return new WaitForEndOfFrame();
+        }
+        obj.GetComponent<RectTransform>().anchoredPosition = desiredPos;
     }
 
     void updateChoices() {
@@ -148,14 +310,7 @@ public class PlayerUI : MonoBehaviour
         choice2Text.text = currentDialog[1].text;
         choice3Text.text = currentDialog[2].text;
     }
-    void StartInteraction() {
-        collider.enabled = false;
-        updateEnemyPortrait(Reaction.Happy);
-        updateHealthUI();
-        updateEnemyHealthUI();
-        updateChoices();
-        UI.gameObject.SetActive(true);
-    }
+
 
 
 }
