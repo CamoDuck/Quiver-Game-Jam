@@ -5,6 +5,7 @@ using UnityEngine;
 public class Audio : MonoBehaviour
 {
 	public AudioSource m_BGAmbient, m_BGMusic, m_Battle1, m_Battle2, m_Dialogue, m_Select, m_Anxiety;
+	public string isPlaying = "BG";
 	
 	// Start is called before the first frame update
 	void Start()
@@ -28,6 +29,7 @@ public class Audio : MonoBehaviour
 
 	public void PlayBackground(float after=0.0f)
 	{
+		isPlaying = "BG";
 		m_Battle1.Stop();
 		m_Battle2.Stop();
 		m_Anxiety.Stop();
@@ -37,6 +39,7 @@ public class Audio : MonoBehaviour
 
 	public void PlayBattle1(float after=0.0f)
 	{
+		isPlaying = "BTL1";
 		m_Battle2.Stop();
 		m_Anxiety.Stop();
 		m_BGMusic.Stop();
@@ -47,6 +50,7 @@ public class Audio : MonoBehaviour
 
 	public void PlayBattle2(float after=0.0f)
 	{
+		isPlaying = "BTL2";
 		m_Battle1.Stop();
 		m_Anxiety.Stop();
 		m_BGMusic.Stop();
@@ -57,6 +61,7 @@ public class Audio : MonoBehaviour
 	
 	public void PlayAnxiety(float after=0.0f)
 	{
+		isPlaying = "ANTY";
 		m_Battle1.Stop();
 		m_Battle2.Stop();
 		m_BGMusic.Stop();

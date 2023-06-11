@@ -173,7 +173,10 @@ public class PlayerUI : MonoBehaviour
         updateHealthUI();
         if (currentHealth >= 100) {
             Death();
-        } 
+        }
+        else if (currentHealth > 50 && m_PlayerAudio.isPlaying != "ANTY") {
+            m_PlayerAudio.PlayAnxiety(1.0f);
+        }
     }
 
     void Death() {
@@ -201,7 +204,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     public void onDialogClick(int choice) {
-        m_PlayerAudio.PlaySelect(); //Audio
+        m_PlayerAudio.PlaySelect();
 
         int Effectiveness = checkEffective(choice); // 0-2
         switch (Effectiveness) {
@@ -242,6 +245,7 @@ public class PlayerUI : MonoBehaviour
         Sprite sprite = coworker.getPortraitSprite(choice);
         enemyPortrait.sprite = sprite;
     }
+
     IEnumerator EndInteraction() {
         m_PlayerAudio.PlayBackground(1.0f);
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
@@ -336,7 +340,13 @@ public class PlayerUI : MonoBehaviour
             m_PlayerAudio.PlayAnxiety(1.0f);
         }
         else {
-            m_PlayerAudio.PlayBattle1(1.0f);
+            float btlRand = Random.Range(0.0f, 1.0f);
+            if (btlRand > 0.5f) {
+                m_PlayerAudio.PlayBattle1(1.0f);
+            }
+            else {
+                m_PlayerAudio.PlayBattle2(1.0f);
+            }
         }
         updateHealthUI();
         updateEnemyHealthUI();
