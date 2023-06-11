@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c41d6e1a506c175458398eecc2a8f940
+guid: eb1b18579d91b2e47b8f76a216a57908
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gorilla_idle_0
+      name: walk_dog_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 695b86a281bd8334a98e797916704a5e
-      internalID: -1244739547
+      spriteID: 06cf89181647ec34cb74270ae43bc6a1
+      internalID: -624815565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gorilla_idle_1
+      name: walk_dog_1
       rect:
         serializedVersion: 2
         x: 32
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 649174372bc69d848b6e6dae8e0f951e
-      internalID: 1363818444
+      spriteID: 537575d309496a64b94535eaca0ffe91
+      internalID: 1756108050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gorilla_idle_2
+      name: walk_dog_2
       rect:
         serializedVersion: 2
         x: 64
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fe4369ad8223ad47961d67c54a06127
-      internalID: 707553183
+      spriteID: cf38a5025bc93d848b3c2e7842e891ca
+      internalID: 1433429469
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gorilla_idle_3
+      name: walk_dog_3
       rect:
         serializedVersion: 2
         x: 96
@@ -182,92 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a527f702fbd21d84bbc32bb2b203b058
-      internalID: -1260966431
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gorilla_idle_4
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3d4be0a2bf0ab9943b4c7a92bbb89a1e
-      internalID: -1773273576
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gorilla_idle_5
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f3d937bb15621614cb231739b1f964df
-      internalID: -1443695595
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gorilla_idle_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f25357b6ea9123429d83f8d3e5723a9
-      internalID: 1945040832
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Gorilla_idle_7
-      rect:
-        serializedVersion: 2
-        x: 224
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eebc09c586cc0fc40bc5785e86adc10f
-      internalID: -535123786
+      spriteID: 98cd4961425ee6e438eaf861b36cf8f5
+      internalID: 926767293
       vertices: []
       indices: 
       edges: []
@@ -283,14 +199,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Gorilla_idle_0: -1244739547
-      Gorilla_idle_1: 1363818444
-      Gorilla_idle_2: 707553183
-      Gorilla_idle_3: -1260966431
-      Gorilla_idle_4: -1773273576
-      Gorilla_idle_5: -1443695595
-      Gorilla_idle_6: 1945040832
-      Gorilla_idle_7: -535123786
+      walk_dog_0: -624815565
+      walk_dog_1: 1756108050
+      walk_dog_2: 1433429469
+      walk_dog_3: 926767293
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
