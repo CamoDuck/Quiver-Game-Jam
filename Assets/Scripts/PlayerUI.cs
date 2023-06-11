@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Diagnostics;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -14,11 +15,14 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI enemyHealthText;
 
     [SerializeField] GameObject dialogueBox;
+    [SerializeField] GameObject playerPortrait;
+    [SerializeField] GameObject enemyPortrait;
     [SerializeField] GameObject choice1Box;
     [SerializeField] GameObject choice2Box;
     [SerializeField] GameObject choice3Box;
     [SerializeField] GameObject healthBox;
     [SerializeField] GameObject enemyHealthBox;
+    [SerializeField] GameObject fadeOverlay;
 
     [SerializeField] GameObject throwableCoworker;
     [SerializeField] Rigidbody2D body;
@@ -148,27 +152,35 @@ public class PlayerUI : MonoBehaviour
     {
         collider.enabled = false;
         updateHealthUI();
-        updateEnemyHealthUI();
+        updateEnemyHealthUI();      
+        StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.0f));
+        StartCoroutine(MoveToDesiredPosition(playerPortrait, 0.1f));
+        StartCoroutine(MoveToDesiredPosition(enemyPortrait, 0.15f));
+        StartCoroutine(MoveToDesiredPosition(healthBox, 0.1f));
+        StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.15f));
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.8f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 1.0f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 1.2f));
+        fadeOverlay.gameObject.SetActive(true);
         UI.gameObject.SetActive(true);
-        //int i = 0;
-
-        //Vector3 desiredPosition = new Vector3(dialogueBox.transform.position.x, dialogueBox.transform.position.y + (70 * reverse), 0.0f);
-        Vector3 desiredPosition = dialogueBox.transform.position;
-        dialogueBox.transform.position = new Vector3(dialogueBox.transform.position.x, dialogueBox.transform.position.y - (dialogueBox.transform.position.y * 2), 0.0f);
-        while (dialogueBox.transform.position.y < (desiredPosition.y - 5))
-        {
-            Vector3 currentPosition = dialogueBox.transform.position;
-            Vector3 interpolatedPosition = Vector3.Lerp(currentPosition, desiredPosition, Time.deltaTime * 5.0f);
-            dialogueBox.transform.position = interpolatedPosition;
-
-            //dialogueBox.transform.position = new Vector3(dialogueBox.transform.position.x, dialogueBox.transform.position.y + (10 * Time.deltaTime), 0.0f);
-            yield return new WaitForEndOfFrame();
-        }
-        dialogueBox.transform.position = desiredPosition;
+        yield return new WaitForSeconds(2.5f);
         StartInteraction();
     }
 
+    IEnumerator MoveToDesiredPosition(GameObject obj, float delay)
+    {
+        Vector2 desiredPos = new Vector2(obj.GetComponent<RectTransform>().anchoredPosition.x, obj.GetComponent<RectTransform>().anchoredPosition.y);
 
+        obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(obj.GetComponent<RectTransform>().anchoredPosition.x, obj.GetComponent<RectTransform>().anchoredPosition.y - 500);
+        yield return new WaitForSeconds(delay);
+        while (obj.GetComponent<RectTransform>().anchoredPosition.y < (desiredPos.y - 4))
+        {
+            Vector2 interpolatedPosition = Vector2.Lerp(obj.GetComponent<RectTransform>().anchoredPosition, desiredPos, Time.deltaTime * 7.0f);
+            obj.GetComponent<RectTransform>().anchoredPosition = interpolatedPosition;;
+            yield return new WaitForEndOfFrame();
+        }
+        obj.GetComponent<RectTransform>().anchoredPosition = desiredPos;
+    }
     
 
     void StartInteraction() {            
