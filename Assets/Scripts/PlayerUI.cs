@@ -14,7 +14,7 @@ public class PlayerUI : MonoBehaviour
     RectTransform choice1Button;
     RectTransform choice2Button;
     RectTransform choice3Button;
-    [SerializeField] TextMeshProUGUI choice1Text;
+    TextMeshProUGUI choice1Text;
     TextMeshProUGUI choice2Text;
     TextMeshProUGUI choice3Text;
     
