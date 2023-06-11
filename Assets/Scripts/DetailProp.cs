@@ -8,13 +8,7 @@ public class DetailProp : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("trigger");
-        animator.enabled = true;
-    }
-
-    void OnTriggerExit()
-    {
-        animator.enabled = false;
+        Debug.Log("Triggered");
     }
     
 }
