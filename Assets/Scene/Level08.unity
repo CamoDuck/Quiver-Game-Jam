@@ -4747,6 +4747,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6727889464833597588, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
   m_PrefabInstance: {fileID: 6014966474684435020}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &828977436 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2037858937079923202, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+  m_PrefabInstance: {fileID: 6014966474684435020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &850759007 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6727889466806949987, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
@@ -34693,6 +34698,30 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6727889465824766655, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727889465824766655, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727889465824766655, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.r
+      value: 0.6862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727889465840333270, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727889465840333270, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727889465840333270, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6727889466138619505, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: m_text
       value: 
@@ -34700,6 +34729,18 @@ PrefabInstance:
     - target: {fileID: 6727889466423320574, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727889466806949990, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727889466806949990, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.49019608
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727889466806949990, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
+      propertyPath: m_Color.r
+      value: 0.49019608
       objectReference: {fileID: 0}
     - target: {fileID: 8250170875064493331, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: m_Name
@@ -34736,7 +34777,7 @@ PrefabInstance:
     - target: {fileID: 8250170875064493342, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: enemyHealthBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 828977436}
     - target: {fileID: 8250170875064493342, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: enemyHealthText
       value: 
