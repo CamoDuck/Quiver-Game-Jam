@@ -149,13 +149,13 @@ public class PlayerUI : MonoBehaviour
     }
 
     void updateHealthUI() {
-        healthText.text = currentHealth + "/" + maxHealth;
+        healthText.text = (maxHealth - currentHealth) + "/" + maxHealth;
     }
 
     void updateEnemyHealthUI() {
         float enemyMaxHealth = coworker.getMaxHealth();
         float enemyHealth = coworker.getHealth();
-        enemyHealthText.text = enemyHealth + "/" + enemyMaxHealth;
+        enemyHealthText.text = (enemyMaxHealth - enemyHealth) + "/" + enemyMaxHealth;
     }
     public void TakeDamage() {
         float value = coworker.attackDamage;
