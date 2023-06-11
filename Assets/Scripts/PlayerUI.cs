@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -24,10 +25,12 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject choice1Box;
     [SerializeField] GameObject choice2Box;
     [SerializeField] GameObject choice3Box;
+    [SerializeField] GameObject healthBox;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
     [SerializeField] CanvasGroup dialogueCanvasGroup; // new
 
+ 
 
 
     RectTransform dialogBox;
@@ -43,6 +46,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] new BoxCollider2D collider;
     [SerializeField] float maxHealth;
     const float playerDamage = 2;
+    [HideInInspector] public PlayerMovement moveScript;
+    public GameOverScene gameOverScreen; 
 
     /// VARYING ///
     List<BaseCoworker> followers = new List<BaseCoworker>();
@@ -52,7 +57,13 @@ public class PlayerUI : MonoBehaviour
     float currentHealth;
 
     void Start() {
-        currentHealth = 0;
+        currentHealth = maxHealth;
+
+        moveScript = GetComponent<PlayerMovement>();
+
+        // HUD = transform.Find("OverworldHUD").GetComponent<Canvas>();
+
+        // HUDHealthText = HUD.transform.Find("Anxiety Amount").GetComponent<TextMeshProUGUI>();
 
         choice1Button = (RectTransform)UI.transform.Find("Choice1");
         choice2Button = (RectTransform)UI.transform.Find("Choice2");
@@ -64,7 +75,8 @@ public class PlayerUI : MonoBehaviour
 
         dialogBox = (RectTransform)UI.transform.Find("DialogueBox");
         playerPortrait = UI.transform.Find("PlayerPortrait").GetComponent<Image>();
-        dialogTextbox = dialogueBox.GetComponentInChildren<TextMeshProUGUI>();
+        dialogBox = (RectTransform) UI.transform.Find("DialogueBox");
+        dialogTextbox = dialogBox.GetComponentInChildren<TextMeshProUGUI>();
 
     }
 
@@ -112,9 +124,9 @@ public class PlayerUI : MonoBehaviour
 
         button.eulerAngles = originalRotation;
         button.localScale = originalScale;
-        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.0f, 1f));
-        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.15f, 1f));
-        StartCoroutine(MoveToDesiredPosition(choice3Box, 0.3f, 1f));
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.0f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.15f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 0.3f));
         choice1Button.gameObject.SetActive(true);
         choice2Button.gameObject.SetActive(true);
         choice3Button.gameObject.SetActive(true);
@@ -155,8 +167,13 @@ public class PlayerUI : MonoBehaviour
 
     }
 
+    public void addHealth(float value) {
+        currentHealth = Mathf.Clamp(value+currentHealth, 0, maxHealth);
+        updateHealthUI();
+    }
+
     void updateHealthUI() {
-        healthText.text = (currentHealth).ToString();
+        healthText.text = (maxHealth - currentHealth).ToString();
     }
 
     void updateEnemyHealthUI() {
@@ -169,9 +186,9 @@ public class PlayerUI : MonoBehaviour
         float value = coworker.attackDamage;
 
         StartCoroutine(shakePortrait(true));
-        currentHealth += value;
+        currentHealth -= value;
         updateHealthUI();
-        if (currentHealth >= 100) {
+        if (currentHealth < 0) {
             Death();
         }
         else if (currentHealth > 50 && m_PlayerAudio.isPlaying != "ANTY") {
@@ -181,6 +198,7 @@ public class PlayerUI : MonoBehaviour
 
     void Death() {
         // send to game over screen
+        SceneManager.LoadScene("GameOver");
     }
 
     int checkEffective(int choice) {
@@ -240,6 +258,9 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+     public void setMovementEnabled(bool value) {
+        moveScript.playerCanMove = value;
+    }
 
     void updateEnemyPortrait(Reaction choice) {
         Sprite sprite = coworker.getPortraitSprite(choice);
@@ -262,8 +283,7 @@ public class PlayerUI : MonoBehaviour
         UI.transform.gameObject.SetActive(false);
         dialogueCanvasGroup.alpha = 1;
         collider.enabled = true;
-        GetComponent<PlayerMovement>().playerCanMove = true;
-        
+        setMovementEnabled(true);
     }
 
     IEnumerator ThrowCoworkers() {
@@ -334,7 +354,7 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator InteractionTransition(int reverse)
     {
-        GetComponent<PlayerMovement>().playerCanMove = false;
+        setMovementEnabled(false);
         collider.enabled = false;
         if (currentHealth > 50) {
             m_PlayerAudio.PlayAnxiety(1.0f);
@@ -352,19 +372,20 @@ public class PlayerUI : MonoBehaviour
         updateEnemyHealthUI();
         updateEnemyPortrait(Reaction.Happy);
         updateChoices();
-        StartCoroutine(MoveToDesiredPosition(fadeOverlay, 0.0f, 1f));
-        StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.1f, 1f));      
-        StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.15f, 1f));
-        StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.35f, 1f));
-        StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.35f, 1f));
-        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.8f, 1f));
-        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.95f, 1f));
-        StartCoroutine(MoveToDesiredPosition(choice3Box, 1.1f, 1f));
+        StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.0f));
+        StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.05f));
+        StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.25f));
+        StartCoroutine(MoveToDesiredPosition(healthBox, 0.05f));
+        StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.25f));
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.7f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.85f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 1.0f));
+        //fadeOverlay.gameObject.SetActive(true);
         UI.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.8f);
     }
 
-    IEnumerator MoveToDesiredPosition(GameObject obj, float delay, float speed)
+    IEnumerator MoveToDesiredPosition(GameObject obj, float delay)
     {
         Vector2 desiredPos = new Vector2(obj.GetComponent<RectTransform>().anchoredPosition.x, obj.GetComponent<RectTransform>().anchoredPosition.y);
 
@@ -372,7 +393,7 @@ public class PlayerUI : MonoBehaviour
         yield return new WaitForSeconds(delay);
         while (obj.GetComponent<RectTransform>().anchoredPosition.y < (desiredPos.y - 4))
         {
-            Vector2 interpolatedPosition = Vector2.Lerp(obj.GetComponent<RectTransform>().anchoredPosition, desiredPos, Time.deltaTime * 7.0f * speed);
+            Vector2 interpolatedPosition = Vector2.Lerp(obj.GetComponent<RectTransform>().anchoredPosition, desiredPos, Time.deltaTime * 7.0f);
             obj.GetComponent<RectTransform>().anchoredPosition = interpolatedPosition; ;
             yield return new WaitForEndOfFrame();
         }

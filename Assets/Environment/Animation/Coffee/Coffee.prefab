@@ -47,8 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca2651006510cf419d8bec154119874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 4785277004391885835}
-  playerTag: Player
+  healthRestore: 1
 --- !u!212 &5108733778701538472
 SpriteRenderer:
   m_ObjectHideFlags: 0
