@@ -58,7 +58,7 @@ public class BaseCoworker : MonoBehaviour
         }
         else
         {
-            am.SetBool("Move", false);
+            // am.SetBool("Move", false);
         }
     }
 
