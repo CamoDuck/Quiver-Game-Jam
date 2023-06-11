@@ -14,6 +14,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI choice1Text;
     TextMeshProUGUI choice2Text;
     TextMeshProUGUI choice3Text;
+    
 
     /// FOR UI TRANSITION ///
     [SerializeField] GameObject playerPortraitMove;
@@ -23,12 +24,14 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject choice3Box;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
+    [SerializeField] CanvasGroup dialogueCanvasGroup; // new
 
 
 
     RectTransform dialogBox;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
+    [SerializeField] TextMeshProUGUI enemyMaxHealthText; // new
     [SerializeField] Image enemyPortrait; 
     Image playerPortrait;
 
@@ -157,7 +160,8 @@ public class PlayerUI : MonoBehaviour
     void updateEnemyHealthUI() {
         float enemyMaxHealth = coworker.getMaxHealth();
         float enemyHealth = coworker.getHealth();
-        enemyHealthText.text = (enemyMaxHealth - enemyHealth) + "/" + enemyMaxHealth;
+        enemyHealthText.text = (enemyHealth).ToString();
+        enemyMaxHealthText.text = "---- " + enemyMaxHealth.ToString();
     }
     public void TakeDamage() {
         float value = coworker.attackDamage;
@@ -234,13 +238,23 @@ public class PlayerUI : MonoBehaviour
         Sprite sprite = coworker.getPortraitSprite(choice);
         enemyPortrait.sprite = sprite;
     }
-    void EndInteraction() {
+    IEnumerator EndInteraction() {
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
         followers.Add(coworker);
         coworker = null;
+        int i = 0;
+        yield return new WaitForSeconds(0.3f);
+        while(i < 60)
+        {
+            dialogueCanvasGroup.alpha -= 0.04f;
+            i++;
+            yield return new WaitForEndOfFrame();
+        }
         UI.transform.gameObject.SetActive(false);
+        dialogueCanvasGroup.alpha = 1;
         collider.enabled = true;
         GetComponent<PlayerMovement>().playerCanMove = true;
+        
     }
 
     IEnumerator ThrowCoworkers() {
@@ -305,7 +319,7 @@ public class PlayerUI : MonoBehaviour
         }
 
         if (isDead) {
-            EndInteraction();
+            StartCoroutine(EndInteraction());
         }
     }
 
