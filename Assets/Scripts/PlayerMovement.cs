@@ -10,7 +10,9 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed;
     public bool playerCanMove;
     [HideInInspector]
-    public Vector2 moveDir; 
+    public Vector2 moveDir;
+
+    public GameObject MainMenuCanvas;
 
     /// VARYING ///
 
@@ -25,7 +27,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Awake() {
-        playerCanMove = false;
+        if(MainMenuCanvas.activeInHierarchy == true)
+        {
+            playerCanMove = false;
+
+        }
+        else
+        {
+            playerCanMove = true;
+        }
+        
         playerInput = new PlayerInput();
         playerInput.Enable();
     }
