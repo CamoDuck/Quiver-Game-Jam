@@ -7,9 +7,14 @@ using TMPro;
 public class PlayerUI : MonoBehaviour
 {
     [SerializeField] Canvas UI;
+    RectTransform choice1Button;
+    RectTransform choice2Button;
+    RectTransform choice3Button;
     [SerializeField] TextMeshProUGUI choice1Text;
-    [SerializeField] TextMeshProUGUI choice2Text;
-    [SerializeField] TextMeshProUGUI choice3Text;
+    TextMeshProUGUI choice2Text;
+    TextMeshProUGUI choice3Text;
+
+    RectTransform dialogBox;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
     [SerializeField] Image enemyPortrait; 
@@ -28,6 +33,68 @@ public class PlayerUI : MonoBehaviour
 
     void Start() {
         currentHealth = maxHealth;
+
+        choice1Button = (RectTransform)UI.transform.Find("Choice1");
+        choice2Button = (RectTransform)UI.transform.Find("Choice2");
+        choice3Button = (RectTransform)UI.transform.Find("Choice3");
+
+        choice1Text = choice1Button.GetComponentInChildren<TextMeshProUGUI>();
+        choice2Text = choice2Button.GetComponentInChildren<TextMeshProUGUI>();
+        choice3Text = choice3Button.GetComponentInChildren<TextMeshProUGUI>();
+
+        dialogBox = (RectTransform)UI.transform.Find("DialogueBox");
+
+    }
+
+    IEnumerator buttonAnimation(int choice) {
+        const float animationDuration = 1f;
+        const float totalSpin = 360; // degrees
+        float animationTimer = animationDuration;
+
+        RectTransform button;
+        if (choice == 1) {
+            button = choice1Button;
+            choice2Button.gameObject.SetActive(false);
+            choice3Button.gameObject.SetActive(false);
+        }
+        else if (choice == 2) {
+            button = choice2Button;
+            choice1Button.gameObject.SetActive(false);
+            choice3Button.gameObject.SetActive(false);
+        }
+        else {
+            button = choice3Button;
+            choice1Button.gameObject.SetActive(false);
+            choice2Button.gameObject.SetActive(false);
+        }
+
+        Vector3 originalRotation = button.eulerAngles;
+        Vector3 originalScale = button.localScale;
+
+        while (animationTimer > 0) {
+            float dt = Time.fixedDeltaTime;
+
+            float angle = dt * totalSpin;
+            button.Rotate(0,0, angle);
+
+            Vector3 scaleDownAmount = Vector3.one * (dt / animationDuration);
+            button.localScale = button.localScale - scaleDownAmount;
+
+            animationTimer -= dt;
+
+            yield return new WaitForFixedUpdate();
+        }
+        button.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.1f);
+
+        button.eulerAngles = originalRotation;
+        button.localScale = originalScale;
+
+        choice1Button.gameObject.SetActive(true);
+        choice2Button.gameObject.SetActive(true);
+        choice3Button.gameObject.SetActive(true);
+
     }
 
     void updateHealthUI() {
@@ -55,6 +122,7 @@ public class PlayerUI : MonoBehaviour
 
     public void onDialogClick(int choice) {
         StartCoroutine(ThrowCoworkers());
+        StartCoroutine(buttonAnimation(choice));
         if (coworker != null) {
             updateEnemyPortrait((Reaction) (choice-1));
             TakeDamage();

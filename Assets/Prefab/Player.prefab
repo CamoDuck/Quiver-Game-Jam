@@ -1689,9 +1689,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 6727889464875598793}
-  choice1Text: {fileID: 6727889466138619505}
-  choice2Text: {fileID: 6727889466423320574}
-  choice3Text: {fileID: 6727889464978345284}
   healthText: {fileID: 6727889466176046630}
   enemyHealthText: {fileID: 6727889466090890922}
   enemyPortrait: {fileID: 6727889466364731019}
