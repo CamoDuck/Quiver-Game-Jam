@@ -281,7 +281,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6727889464875598794}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -358,9 +358,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4287577070666419887}
-  - {fileID: 6727889465335959225}
   - {fileID: 6727889464833597589}
   - {fileID: 6727889466364731018}
+  - {fileID: 6727889465335959225}
   - {fileID: 6727889465840333268}
   - {fileID: 6727889465824766653}
   - {fileID: 6727889466806949988}
@@ -601,7 +601,7 @@ RectTransform:
   m_Children:
   - {fileID: 6727889465650334366}
   m_Father: {fileID: 6727889464875598794}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7882353}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1215,7 +1215,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6727889464875598794}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1804,9 +1804,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a70670bb5b1aa34a85328535669592a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueBox: {fileID: 0}
   UI: {fileID: 6727889464875598793}
   choice1Text: {fileID: 0}
-  dialogueBox: {fileID: 0}
   playerPortraitMove: {fileID: 0}
   enemyPortraitMove: {fileID: 0}
   choice1Box: {fileID: 0}
@@ -1817,6 +1817,7 @@ MonoBehaviour:
   dialogueCanvasGroup: {fileID: 0}
   healthText: {fileID: 0}
   enemyHealthText: {fileID: 0}
+  enemyMaxHealthText: {fileID: 0}
   enemyPortrait: {fileID: 6727889466364731019}
   throwableCoworker: {fileID: 6430857928202580405, guid: 2358f23f8e9d6244a83ea8b852902c8d, type: 3}
   body: {fileID: 8250170875064493341}
