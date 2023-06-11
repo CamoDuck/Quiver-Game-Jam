@@ -52,6 +52,9 @@ TagManager:
   - name: EnvironmentBack
     uniqueID: 3656236829
     locked: 0
+  - name: DetailCenter
+    uniqueID: 3077976395
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
