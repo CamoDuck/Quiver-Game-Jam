@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442154719257767340}
-  - component: {fileID: 1681344022341786873}
+  - component: {fileID: 3058258362010705398}
   - component: {fileID: 6593895382137241223}
   - component: {fileID: 7970385166677899847}
   - component: {fileID: 4196773624918766061}
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1681344022341786873
+--- !u!114 &3058258362010705398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3785310841626892458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be343bd74c245c7418996f210301a094, type: 3}
+  m_Script: {fileID: 11500000, guid: 73e1e606a93f2bb48ac39ee113744a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 4196773624918766061}
@@ -56,10 +56,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c7e4df97a432e8042ba5e2e3abc4591d, type: 3}
   - {fileID: 21300000, guid: 08f08fbfe42e0e345be3994d0e874fa8, type: 3}
   - {fileID: 21300000, guid: e60f1f8729caf5b42aba8873a3309abe, type: 3}
-  coworkerName: Mouse
-  maxHealth: 10
+  coworkerName: Gorilla
+  maxHealth: 200
   sprite: {fileID: 0}
-  attackDamage: 2
+  attackDamage: 20
   reactionType: 3
 --- !u!212 &6593895382137241223
 SpriteRenderer:
@@ -102,7 +102,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1ffaba48c7fdf3e4e820775ae7fc2e5b, type: 3}
+  m_Sprite: {fileID: -1244739547, guid: c41d6e1a506c175458398eecc2a8f940, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -130,7 +130,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.1724138, y: 2}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 0.17, y: 0.29}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -170,7 +170,7 @@ Animator:
   m_GameObject: {fileID: 3785310841626892458}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fff64d08709e5df4db8ef9261133c60b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 98b3a5c6021c80b48b3b0452806c143e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
