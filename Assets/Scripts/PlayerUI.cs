@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject fadeOverlay;
     [SerializeField] CanvasGroup dialogueCanvasGroup; // new
 
+ 
 
 
     RectTransform dialogBox;
@@ -41,6 +43,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] new BoxCollider2D collider;
     [SerializeField] float maxHealth;
     const float playerDamage = 2;
+    public GameOverScene gameOverScreen; 
 
     /// VARYING ///
     List<BaseCoworker> followers = new List<BaseCoworker>();
@@ -176,6 +179,7 @@ public class PlayerUI : MonoBehaviour
 
     void Death() {
         // send to game over screen
+        SceneManager.LoadScene("GameOver");
     }
 
     int checkEffective(int choice) {

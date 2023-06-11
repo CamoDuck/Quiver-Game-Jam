@@ -34405,11 +34405,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6727889465840333267, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
   m_PrefabInstance: {fileID: 6014966474684435020}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1639903481 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6727889466090890920, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
-  m_PrefabInstance: {fileID: 6014966474684435020}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1657799349
 GameObject:
   m_ObjectHideFlags: 0
@@ -34654,10 +34649,10 @@ RectTransform:
   m_Father: {fileID: 259880079}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2013261970
 MonoBehaviour:
@@ -34691,7 +34686,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 767a29cb656eb3e42858cce72dd1871b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -34792,7 +34787,7 @@ PrefabInstance:
     - target: {fileID: 8250170875064493342, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: enemyHealthBox
       value: 
-      objectReference: {fileID: 1639903481}
+      objectReference: {fileID: 0}
     - target: {fileID: 8250170875064493342, guid: 95a01c7f9559d2f46a7eb04967af8aa1, type: 3}
       propertyPath: enemyPortraitMove
       value: 
