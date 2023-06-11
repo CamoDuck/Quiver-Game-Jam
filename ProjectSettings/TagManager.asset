@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Coworker
+  - Follower
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
     locked: 0
   - name: DetailBack
     uniqueID: 3384854401
+    locked: 0
+  - name: DetailBack02
+    uniqueID: 1301512207
     locked: 0
   - name: EnvironmentBack
     uniqueID: 3656236829

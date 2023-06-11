@@ -765,6 +765,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 2379882545224026163}
+  walkSpeed: 5
+  moveDir: {x: 0, y: 0}
 --- !u!114 &2379882545224026160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +783,12 @@ MonoBehaviour:
   choice1Text: {fileID: 2379882545029094222}
   choice2Text: {fileID: 2379882544275079926}
   choice3Text: {fileID: 2379882545000592694}
+  healthText: {fileID: 0}
+  enemyHealthText: {fileID: 0}
+  throwableCoworker: {fileID: 0}
+  body: {fileID: 0}
   collider: {fileID: 2379882545224026167}
+  maxHealth: 0
 --- !u!61 &2379882545224026167
 BoxCollider2D:
   m_ObjectHideFlags: 0
