@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442154719257767340}
-  - component: {fileID: 1681344022341786873}
+  - component: {fileID: 230498948333625588}
   - component: {fileID: 6593895382137241223}
   - component: {fileID: 7970385166677899847}
   - component: {fileID: 4196773624918766061}
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1681344022341786873
+--- !u!114 &230498948333625588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3785310841626892458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be343bd74c245c7418996f210301a094, type: 3}
+  m_Script: {fileID: 11500000, guid: a8f56475e2e80d64e9ae3c1c2cfe750d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   body: {fileID: 4196773624918766061}
@@ -56,10 +56,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c04d625d4abcbd54eb9221fb6d325f98, type: 3}
   - {fileID: 21300000, guid: 83e187ce202457b409da86689b488cb3, type: 3}
   - {fileID: 21300000, guid: ddf4831d3f9e4b84887caf2d63613359, type: 3}
-  coworkerName: Mouse
-  maxHealth: 10
+  coworkerName: Dog
+  maxHealth: 100
   sprite: {fileID: 0}
-  attackDamage: 2
+  attackDamage: 5
   reactionType: 3
 --- !u!212 &6593895382137241223
 SpriteRenderer:
@@ -168,9 +168,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3785310841626892458}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fff64d08709e5df4db8ef9261133c60b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6059818b289e1694fbd71f621ec24b50, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
