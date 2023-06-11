@@ -60,7 +60,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     IEnumerator buttonAnimation(int choice) {
-        const float animationDuration = 1f;
+        const float animationDuration = 0.5f;
         const float totalSpin = 360; // degrees
         float animationTimer = animationDuration;
 
@@ -103,7 +103,9 @@ public class PlayerUI : MonoBehaviour
 
         button.eulerAngles = originalRotation;
         button.localScale = originalScale;
-
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.0f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.15f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 0.3f));
         choice1Button.gameObject.SetActive(true);
         choice2Button.gameObject.SetActive(true);
         choice3Button.gameObject.SetActive(true);
@@ -160,6 +162,7 @@ public class PlayerUI : MonoBehaviour
         coworker = null;
         UI.transform.gameObject.SetActive(false);
         collider.enabled = true;
+        GetComponent<PlayerMovement>().playerCanMove = true;
     }
 
     IEnumerator ThrowCoworkers() {
@@ -225,10 +228,12 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator InteractionTransition(int reverse)
     {
+        GetComponent<PlayerMovement>().playerCanMove = false;
         collider.enabled = false;
         updateHealthUI();
         updateEnemyHealthUI();
         updateEnemyPortrait(Reaction.Happy);
+        updateChoices();
         StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.0f));
         StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.05f));
         StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.25f));
@@ -240,7 +245,6 @@ public class PlayerUI : MonoBehaviour
         //fadeOverlay.gameObject.SetActive(true);
         UI.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.8f);
-        StartInteraction();
     }
 
     IEnumerator MoveToDesiredPosition(GameObject obj, float delay)
@@ -264,9 +268,7 @@ public class PlayerUI : MonoBehaviour
         choice2Text.text = currentDialog[1].text;
         choice3Text.text = currentDialog[2].text;
     }
-    void StartInteraction() {      
-        updateChoices();
-    }
+
 
 
 }

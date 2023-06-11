@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerInput playerInput;
     [SerializeField] Rigidbody2D body;
     public float walkSpeed;
+    public bool playerCanMove;
     [HideInInspector]
     public Vector2 moveDir; 
 
@@ -15,16 +16,16 @@ public class PlayerMovement : MonoBehaviour
 
     void start() {
         body = GetComponent<Rigidbody2D>();
+        
 
     }
 
     void Update(){
-
-        InputManagement();
-
+        InputManagement();     
     }
 
     void Awake() {
+        playerCanMove = true;
         playerInput = new PlayerInput();
         playerInput.Enable();
     }
@@ -37,7 +38,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FixedUpdate(){
-        Move();
+        if(playerCanMove == true)
+        {
+            Move();
+        }
+        else
+        {
+            body.velocity = new Vector2(0, 0);
+        }
     }
 
     void Move() {
