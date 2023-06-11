@@ -6,6 +6,7 @@ using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
+    [SerializeField] GameObject dialogueBox;
     [SerializeField] Canvas UI;
     RectTransform choice1Button;
     RectTransform choice2Button;
@@ -13,9 +14,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI choice1Text;
     TextMeshProUGUI choice2Text;
     TextMeshProUGUI choice3Text;
+    
 
     /// FOR UI TRANSITION ///
-    [SerializeField] GameObject dialogueBox;
     [SerializeField] GameObject playerPortraitMove;
     [SerializeField] GameObject enemyPortraitMove;
     [SerializeField] GameObject choice1Box;
@@ -23,14 +24,18 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject choice3Box;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
+    [SerializeField] CanvasGroup dialogueCanvasGroup; // new
 
 
 
     RectTransform dialogBox;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
+    [SerializeField] TextMeshProUGUI enemyMaxHealthText; // new
     [SerializeField] Image enemyPortrait; 
     Image playerPortrait;
+
+    TextMeshProUGUI dialogTextbox;
     [SerializeField] GameObject throwableCoworker;
     [SerializeField] Rigidbody2D body;
     [SerializeField] new BoxCollider2D collider;
@@ -57,6 +62,7 @@ public class PlayerUI : MonoBehaviour
 
         dialogBox = (RectTransform)UI.transform.Find("DialogueBox");
         playerPortrait = UI.transform.Find("PlayerPortrait").GetComponent<Image>();
+        dialogTextbox = dialogueBox.GetComponentInChildren<TextMeshProUGUI>();
 
     }
 
@@ -154,7 +160,8 @@ public class PlayerUI : MonoBehaviour
     void updateEnemyHealthUI() {
         float enemyMaxHealth = coworker.getMaxHealth();
         float enemyHealth = coworker.getHealth();
-        enemyHealthText.text = (enemyMaxHealth - enemyHealth) + "/" + enemyMaxHealth;
+        enemyHealthText.text = (enemyHealth).ToString();
+        enemyMaxHealthText.text = "---- " + enemyMaxHealth.ToString();
     }
     public void TakeDamage() {
         float value = coworker.attackDamage;
@@ -171,12 +178,50 @@ public class PlayerUI : MonoBehaviour
         // send to game over screen
     }
 
+    int checkEffective(int choice) {
+        Reaction coworkerType = coworker.getReactionType();
+        Reaction choiceType = (Reaction)(choice-1);
+
+        if (coworkerType == choiceType) {
+            return 2;
+        }
+
+        if (coworkerType == Reaction.Sad) {
+            return choiceType==Reaction.Joke? 1: 0;
+        }
+        else if (coworkerType == Reaction.Happy) {
+            return choiceType==Reaction.Joke? 1: 0;
+        }
+        else { // Joke
+            return choiceType==Reaction.Happy? 1: 0;
+        }
+
+    }
+
     public void onDialogClick(int choice) {
-        StartCoroutine(ThrowCoworkers());
+        int Effectiveness = checkEffective(choice); // 0-2
+        switch (Effectiveness) {
+            case 0:
+                dialogTextbox.text = "That was awkward...";
+                break;
+            case 1:
+                dialogTextbox.text = "That was normal.";
+                break;
+            case 2:
+                dialogTextbox.text = "They liked it alot!";
+                break;
+        }
+
+        if (Effectiveness >= 1) {
+            StartCoroutine(ThrowCoworkers());
+        }
+
         StartCoroutine(buttonAnimation(choice));
         if (coworker != null) {
             updateEnemyPortrait((Reaction) (choice-1));
-            TakeDamage();
+            if (Effectiveness <= 1) {
+                TakeDamage();
+            }
             updateChoices();
         }
     }
@@ -188,17 +233,28 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+
     void updateEnemyPortrait(Reaction choice) {
         Sprite sprite = coworker.getPortraitSprite(choice);
         enemyPortrait.sprite = sprite;
     }
-    void EndInteraction() {
+    IEnumerator EndInteraction() {
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
         followers.Add(coworker);
         coworker = null;
+        int i = 0;
+        yield return new WaitForSeconds(0.3f);
+        while(i < 60)
+        {
+            dialogueCanvasGroup.alpha -= 0.04f;
+            i++;
+            yield return new WaitForEndOfFrame();
+        }
         UI.transform.gameObject.SetActive(false);
+        dialogueCanvasGroup.alpha = 1;
         collider.enabled = true;
         GetComponent<PlayerMovement>().playerCanMove = true;
+        
     }
 
     IEnumerator ThrowCoworkers() {
@@ -263,7 +319,7 @@ public class PlayerUI : MonoBehaviour
         }
 
         if (isDead) {
-            EndInteraction();
+            StartCoroutine(EndInteraction());
         }
     }
 
@@ -307,6 +363,27 @@ public class PlayerUI : MonoBehaviour
         choice1Text.text = currentDialog[0].text;
         choice2Text.text = currentDialog[1].text;
         choice3Text.text = currentDialog[2].text;
+
+        StartCoroutine(setReactionType());
+    }
+
+    IEnumerator setReactionType() {
+        yield return new WaitForSeconds(1f);
+
+        Reaction reactionType = (Reaction) Random.Range(0,3);
+        coworker.setReactionType(reactionType);
+
+        switch (reactionType) {
+            case Reaction.Joke:
+                dialogTextbox.text = "They are laughing at a meme on their phone...";
+                break;
+            case Reaction.Happy:
+                dialogTextbox.text = "They are humming to themselves..";
+                break;
+            case Reaction.Sad:
+                dialogTextbox.text = "They are on the verge of tears...";
+                break;
+        }
     }
 
 
