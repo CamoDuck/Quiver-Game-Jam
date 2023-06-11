@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Awake() {
-        playerCanMove = true;
+        playerCanMove = false;
         playerInput = new PlayerInput();
         playerInput.Enable();
     }
