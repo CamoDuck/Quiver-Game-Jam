@@ -16,6 +16,7 @@ public class BaseCoworker : MonoBehaviour
     public Sprite sprite;
     [SerializeField] public float attackDamage;
     [SerializeField] protected Reaction reactionType;
+    [SerializeField] Rigidbody2D playerRB2D;
 
 
     /// VARYING ///
@@ -106,7 +107,7 @@ public class BaseCoworker : MonoBehaviour
     }
     void SpriteDirectionChecker()
     {
-        if (body.velocity.x < 0)
+        if (playerRB2D.velocity.x < 0)
         {
             sr.flipX = true;
         }
