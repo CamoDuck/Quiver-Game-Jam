@@ -9,8 +9,7 @@ public class Audio : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		//AudioSource m_MyAudioSource = GetComponent<AudioSource>();
-		PlayBackground();
+		PlayBackground(0.0f);
 	}
 
 	// Update is called once per frame
@@ -19,47 +18,51 @@ public class Audio : MonoBehaviour
 		
 	}
 
-	void PlayBackground()
+	private void PlayBGAfter()	{ m_BGMusic.Play();	m_BGAmbient.Play(); }
+
+	private void PlayBattle1After()	{ m_Battle1.Play();	}
+
+	private void PlayBattle2After()	{ m_Battle2.Play();	}
+
+	private void PlayAnxietyAfter() { m_Anxiety.Play(); }
+
+	void PlayBackground(float after=0.0f)
 	{
 		m_Battle1.Stop();
 		m_Battle2.Stop();
-		//m_Dialogue.Stop();
-		//m_Select.Stop();
 		m_Anxiety.Stop();
 
-		m_BGMusic.Play();
-		m_BGAmbient.Play();
+		Invoke(nameof(PlayBGAfter), after);
+	}
+
+	void PlayBattle1(float after=0.0f)
+	{
+		m_Battle2.Stop();
+		m_Anxiety.Stop();
+		m_BGMusic.Stop();
+		m_BGAmbient.Stop();
 		
+		Invoke(nameof(PlayBattle1After), after);
 	}
 
-	void PlayBattle1()
-	{
-		m_Battle1.Play();
-		m_Battle2.Stop();
-		m_Anxiety.Stop();
-
-		m_BGMusic.Stop();
-		m_BGAmbient.Stop();
-	}
-
-	void PlayBattle2()
+	void PlayBattle2(float after=0.0f)
 	{
 		m_Battle1.Stop();
-		m_Battle2.Play();
 		m_Anxiety.Stop();
-
 		m_BGMusic.Stop();
 		m_BGAmbient.Stop();
+
+		Invoke(nameof(PlayBattle2After), after);
 	}
 	
-	void PlayAnxiety()
+	void PlayAnxiety(float after=0.0f)
 	{
 		m_Battle1.Stop();
 		m_Battle2.Stop();
-		m_Anxiety.Play();
-
 		m_BGMusic.Stop();
 		m_BGAmbient.Stop();
+		
+		Invoke(nameof(PlayAnxietyAfter), after);
 	}
 
 	void PlayDialogue()
