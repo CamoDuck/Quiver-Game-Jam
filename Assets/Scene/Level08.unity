@@ -182,6 +182,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1681344022341786873, guid: a34ca530aed96bf47b92f8fa38f30152, type: 3}
+      propertyPath: reactionType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3785310841626892458, guid: a34ca530aed96bf47b92f8fa38f30152, type: 3}
       propertyPath: m_Name
       value: Mouse.003

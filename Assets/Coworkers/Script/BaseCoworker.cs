@@ -62,6 +62,9 @@ public class BaseCoworker : MonoBehaviour
         }
     }
 
+    public void setReactionType(Reaction reactionType) {
+        this.reactionType = reactionType;
+    }
     public float getMaxHealth() {
         return maxHealth;
     }
