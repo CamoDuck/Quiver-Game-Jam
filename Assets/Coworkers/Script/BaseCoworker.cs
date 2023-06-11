@@ -25,9 +25,16 @@ public class BaseCoworker : MonoBehaviour
     protected DialogChoices[] happy;
     protected DialogChoices[] sad;
 
+    //ANIMATIONS//
+    //References 
+    Animator am;
+    //PlayerMovement pm;
+    SpriteRenderer sr;
+
     void Start() {
         currentHealth = maxHealth;
-
+        am = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         sprite = GetComponent<SpriteRenderer>().sprite;
     }
 
@@ -36,7 +43,22 @@ public class BaseCoworker : MonoBehaviour
 
         float distFromTarget = (followTarget.position - body.position).magnitude;
         if (distFromTarget > followDistance) {
+            am.SetBool("Move", true);
             body.MovePosition(Vector2.MoveTowards(body.position, followTarget.position, followSpeed * Time.fixedDeltaTime));
+        }
+    }
+
+    void Update()
+    {
+        if (body.velocity.x != 0 || body.velocity.y != 0)
+        {
+            Debug.Log("moving!");
+            am.SetBool("Move", true);
+            SpriteDirectionChecker();
+        }
+        else
+        {
+            am.SetBool("Move", false);
         }
     }
 
@@ -75,7 +97,18 @@ public class BaseCoworker : MonoBehaviour
 
         return dialog;
     }
-    
+    void SpriteDirectionChecker()
+    {
+        if (body.velocity.x < 0)
+        {
+            sr.flipX = true;
+        }
+        else
+        {
+            sr.flipX = false;
+        }
+    }
+
     /// Return whether the given dialog option for the given dialog prompt was successful
     // public bool TryInteraction(int dialogOption) {
     //     // move down the dialogue tree
