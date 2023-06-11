@@ -83,8 +83,8 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator ThrowCoworkers() {
         Vector2 diretion = new Vector2(1,1).normalized;
-        float minForceStregth = 5;
-        float maxForceStrength = 10;
+        float minForceStregth = 3;
+        float maxForceStrength = 6;
         float maxThrowDisplacement = 5;
         float maxWaitBetweenThrows = 0.3f;
 
@@ -102,6 +102,7 @@ public class PlayerUI : MonoBehaviour
         int count = coworkerSynergy.Count;
         for (int i = 0; i < count; i++) {
             Transform clone = Instantiate(throwableCoworker).transform;
+            clone.position = transform.position;
             Rigidbody2D body = clone.GetComponent<Rigidbody2D>();
 
             BaseCoworker currentFollower = coworkerSynergy[i];

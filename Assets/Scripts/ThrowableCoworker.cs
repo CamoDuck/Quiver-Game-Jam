@@ -13,7 +13,7 @@ public class ThrowableCoworker : MonoBehaviour
     void Update() {
         lifeTime -= Time.deltaTime;
         if (lifeTime <= 0) {
-            Destroy(transform);
+            Destroy(gameObject);
         }
     }
 }

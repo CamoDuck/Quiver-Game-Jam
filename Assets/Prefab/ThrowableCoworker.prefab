@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2992519211390957573}
   - component: {fileID: 870589127879406941}
   - component: {fileID: 1513720135074262916}
+  - component: {fileID: 4424411482865795549}
   m_Layer: 0
   m_Name: ThrowableCoworker
   m_TagString: Untagged
@@ -106,3 +107,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4424411482865795549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6430857928202580405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9436f35834550094fafa9c4352c3c41e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
