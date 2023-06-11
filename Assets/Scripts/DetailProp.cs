@@ -4,21 +4,49 @@ using UnityEngine;
 
 public class DetailProp : MonoBehaviour
 {
-    public Animator animator;
-    public string playerTag;
+    new Collider2D collider;
+    PlayerUI playerScript;
 
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag != playerTag) return;
-
-        animator.SetBool("triggered", true);
+    void Start() {
+        collider = GetComponent<Collider2D>();
     }
 
-    void OnTriggerExit2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collider.gameObject.tag != playerTag) return;
-
-        animator.SetBool("triggered", false);        
+        if (other.tag == "Player") {
+            collider.enabled = false;
+            playerScript = other.transform.GetComponent<PlayerUI>();
+            StartCoroutine(StartAnimation());
+        }
     }
+
+    IEnumerator StartAnimation() {
+        const float animationDuration = 1;
+        float animationTimer = animationDuration;
+        float totalRotation = 360; //degrees
+        Vector2 originalPosition = transform.position;
+        Vector2 destination = playerScript.transform.position;
+
+        playerScript.setMovementEnabled(false);
+
+    
+        
+        while (animationTimer > 0) {
+            float dt = Time.fixedDeltaTime;
+
+            float weight = animationTimer/animationDuration;
+            transform.position = Vector2.Lerp(destination, originalPosition, weight);
+            transform.localScale -= Vector3.one * (dt / animationDuration);
+
+            float angleChange = totalRotation * dt / animationDuration;
+            transform.Rotate(Vector3.forward * angleChange);
+
+            animationTimer -= dt;
+            yield return new WaitForFixedUpdate();
+        }
+
+        playerScript.setMovementEnabled(true);
+    }
+
     
 }
