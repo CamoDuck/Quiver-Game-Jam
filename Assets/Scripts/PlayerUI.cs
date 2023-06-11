@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
+    public Audio m_PlayerAudio;
+    
     [SerializeField] GameObject dialogueBox;
     [SerializeField] Canvas UI;
     RectTransform choice1Button;
@@ -52,6 +54,8 @@ public class PlayerUI : MonoBehaviour
     DialogChoices currentDialog;
 
     float currentHealth;
+    const float anxietyThreshold = 50.0f;
+    const float musicDelay = 1.0f; //Seconds
 
     void Start() {
         currentHealth = maxHealth;
@@ -187,7 +191,10 @@ public class PlayerUI : MonoBehaviour
         updateHealthUI();
         if (currentHealth <= 0) {
             Death();
-        } 
+        }
+        else if (currentHealth < anxietyThreshold && m_PlayerAudio.isPlaying != "ANTY") {
+            m_PlayerAudio.PlayAnxiety(musicDelay);
+        }
     }
 
     void Death() {
@@ -216,6 +223,8 @@ public class PlayerUI : MonoBehaviour
     }
 
     public void onDialogClick(int choice) {
+        m_PlayerAudio.PlaySelect();
+
         int Effectiveness = checkEffective(choice); // 0-2
         switch (Effectiveness) {
             case 0:
@@ -232,7 +241,7 @@ public class PlayerUI : MonoBehaviour
         if (Effectiveness >= 1) {
             StartCoroutine(ThrowCoworkers());
         }
-
+        
         StartCoroutine(buttonAnimation(choice));
         if (coworker != null) {
             updateEnemyPortrait((Reaction) (choice-1));
@@ -258,7 +267,9 @@ public class PlayerUI : MonoBehaviour
         Sprite sprite = coworker.getPortraitSprite(choice);
         enemyPortrait.sprite = sprite;
     }
+
     IEnumerator EndInteraction() {
+        m_PlayerAudio.PlayBackground(musicDelay);
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
         followers.Add(coworker);
         coworker = null;
@@ -346,6 +357,17 @@ public class PlayerUI : MonoBehaviour
     {
         setMovementEnabled(false);
         collider.enabled = false;
+        if (currentHealth < anxietyThreshold) {
+            m_PlayerAudio.PlayAnxiety(musicDelay);
+        }
+        else {
+            if (Random.Range(0.0f, 1.0f) > 0.5f) {
+                m_PlayerAudio.PlayBattle1(musicDelay);
+            }
+            else {
+                m_PlayerAudio.PlayBattle2(musicDelay);
+            }
+        }
         updateHealthUI();
         updateEnemyHealthUI();
         updateEnemyPortrait(Reaction.Happy);
@@ -378,6 +400,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     void updateChoices() {
+        m_PlayerAudio.PlayDialogue(); //Audio
         DialogChoices[] currentDialog = coworker.GetInteraction();
         choice1Text.text = currentDialog[0].text;
         choice2Text.text = currentDialog[1].text;
