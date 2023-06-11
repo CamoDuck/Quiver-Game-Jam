@@ -14,6 +14,19 @@ public class PlayerUI : MonoBehaviour
     TextMeshProUGUI choice2Text;
     TextMeshProUGUI choice3Text;
 
+    /// FOR UI TRANSITION ///
+    [SerializeField] GameObject dialogueBox;
+    [SerializeField] GameObject playerPortraitMove;
+    [SerializeField] GameObject enemyPortraitMove;
+    [SerializeField] GameObject choice1Box;
+    [SerializeField] GameObject choice2Box;
+    [SerializeField] GameObject choice3Box;
+    [SerializeField] GameObject healthBox;
+    [SerializeField] GameObject enemyHealthBox;
+    [SerializeField] GameObject fadeOverlay;
+
+
+
     RectTransform dialogBox;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
@@ -133,7 +146,7 @@ public class PlayerUI : MonoBehaviour
     void OnTriggerEnter2D (Collider2D other) {
         if (other.tag == "Coworker") {
             coworker = other.GetComponent<BaseCoworker>();
-            StartInteraction();
+            StartCoroutine(InteractionTransition(1));
         }
     }
 
@@ -210,19 +223,49 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+    IEnumerator InteractionTransition(int reverse)
+    {
+        collider.enabled = false;
+        updateHealthUI();
+        updateEnemyHealthUI();
+        updateEnemyPortrait(Reaction.Happy);
+        StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.0f));
+        StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.05f));
+        StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.25f));
+        StartCoroutine(MoveToDesiredPosition(healthBox, 0.05f));
+        StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.25f));
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.7f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.85f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 1.0f));
+        //fadeOverlay.gameObject.SetActive(true);
+        UI.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.8f);
+        StartInteraction();
+    }
+
+    IEnumerator MoveToDesiredPosition(GameObject obj, float delay)
+    {
+        Vector2 desiredPos = new Vector2(obj.GetComponent<RectTransform>().anchoredPosition.x, obj.GetComponent<RectTransform>().anchoredPosition.y);
+
+        obj.GetComponent<RectTransform>().anchoredPosition = new Vector2(obj.GetComponent<RectTransform>().anchoredPosition.x, obj.GetComponent<RectTransform>().anchoredPosition.y - 500);
+        yield return new WaitForSeconds(delay);
+        while (obj.GetComponent<RectTransform>().anchoredPosition.y < (desiredPos.y - 4))
+        {
+            Vector2 interpolatedPosition = Vector2.Lerp(obj.GetComponent<RectTransform>().anchoredPosition, desiredPos, Time.deltaTime * 7.0f);
+            obj.GetComponent<RectTransform>().anchoredPosition = interpolatedPosition; ;
+            yield return new WaitForEndOfFrame();
+        }
+        obj.GetComponent<RectTransform>().anchoredPosition = desiredPos;
+    }
+
     void updateChoices() {
         DialogChoices[] currentDialog = coworker.GetInteraction();
         choice1Text.text = currentDialog[0].text;
         choice2Text.text = currentDialog[1].text;
         choice3Text.text = currentDialog[2].text;
     }
-    void StartInteraction() {
-        collider.enabled = false;
-        updateEnemyPortrait(Reaction.Happy);
-        updateHealthUI();
-        updateEnemyHealthUI();
+    void StartInteraction() {      
         updateChoices();
-        UI.gameObject.SetActive(true);
     }
 
 
