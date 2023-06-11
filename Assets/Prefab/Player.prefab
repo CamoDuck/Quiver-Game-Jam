@@ -1823,8 +1823,9 @@ MonoBehaviour:
   throwableCoworker: {fileID: 6430857928202580405, guid: 2358f23f8e9d6244a83ea8b852902c8d, type: 3}
   body: {fileID: 8250170875064493341}
   collider: {fileID: 8250170875064493337}
-  maxHealth: 15
+  maxHealth: 100
   moveScript: {fileID: 0}
+  gameOverScreen: {fileID: 0}
 --- !u!61 &8250170875064493337
 BoxCollider2D:
   m_ObjectHideFlags: 0

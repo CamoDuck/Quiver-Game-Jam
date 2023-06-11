@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class DetailProp : MonoBehaviour
 {
+    [SerializeField] float healthRestore = 1;
     new Collider2D collider;
     PlayerUI playerScript;
+    
 
     void Start() {
         collider = GetComponent<Collider2D>();
@@ -46,6 +48,7 @@ public class DetailProp : MonoBehaviour
         }
 
         playerScript.setMovementEnabled(true);
+        playerScript.addHealth(healthRestore);
     }
 
     
