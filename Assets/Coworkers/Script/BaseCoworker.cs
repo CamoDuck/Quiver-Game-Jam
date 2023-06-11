@@ -47,6 +47,10 @@ public class BaseCoworker : MonoBehaviour
         return currentHealth;
     }
 
+    public Sprite getPortraitSprite(Reaction reaction) {
+        return portrait[(int)reaction];
+    }
+
     public Reaction getReactionType() {
         return reactionType;
     }

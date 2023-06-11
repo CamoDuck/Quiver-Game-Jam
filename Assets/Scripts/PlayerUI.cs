@@ -12,6 +12,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI choice3Text;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
+    [SerializeField] Image enemyPortrait; 
     [SerializeField] GameObject throwableCoworker;
     [SerializeField] Rigidbody2D body;
     [SerializeField] new BoxCollider2D collider;
@@ -55,6 +56,7 @@ public class PlayerUI : MonoBehaviour
     public void onDialogClick(int choice) {
         StartCoroutine(ThrowCoworkers());
         if (coworker != null) {
+            updateEnemyPortrait((Reaction) (choice-1));
             TakeDamage();
             updateChoices();
         }
@@ -67,6 +69,10 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
+    void updateEnemyPortrait(Reaction choice) {
+        Sprite sprite = coworker.getPortraitSprite(choice);
+        enemyPortrait.sprite = sprite;
+    }
     void EndInteraction() {
         coworker.followTarget = followers.Count==0? body: followers[followers.Count-1].body;
         followers.Add(coworker);
@@ -137,6 +143,7 @@ public class PlayerUI : MonoBehaviour
     }
     void StartInteraction() {
         collider.enabled = false;
+        updateEnemyPortrait(Reaction.Happy);
         updateHealthUI();
         updateEnemyHealthUI();
         updateChoices();

@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 769404978480485988}
   - component: {fileID: 4590080884891128484}
   - component: {fileID: 7715420744504383758}
-  - component: {fileID: 4752412661040214917}
   m_Layer: 0
-  m_Name: Hippo
+  m_Name: Dog
   m_TagString: Coworker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,28 +133,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4752412661040214917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7324930031485251657}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be343bd74c245c7418996f210301a094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  body: {fileID: 7715420744504383758}
-  followTarget: {fileID: 0}
-  followSpeed: 10
-  followDistance: 1
-  portrait:
-  - {fileID: 21300000, guid: 48fc04ddb5fba24479ca9e02abfb4ed8, type: 3}
-  - {fileID: 21300000, guid: 9a730968df95c024fb239e3654ac7e27, type: 3}
-  - {fileID: 21300000, guid: f6258ee64d5a20b40944ba87e9453251, type: 3}
-  coworkerName: Hippo
-  maxHealth: 10
-  sprite: {fileID: 0}
-  attackDamage: 2
-  reactionType: 0
