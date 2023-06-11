@@ -83,8 +83,9 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator ThrowCoworkers() {
         Vector2 diretion = new Vector2(1,1).normalized;
-        float minForceStregth = 3;
-        float maxForceStrength = 6;
+        float maxTorque = 90;
+        float minForceStregth = 4;
+        float maxForceStrength = 7;
         float maxThrowDisplacement = 5;
         float maxWaitBetweenThrows = 0.3f;
 
@@ -100,6 +101,7 @@ public class PlayerUI : MonoBehaviour
 
         coworkerSynergy = followers; // TEMP - this disables the classes system
         int count = coworkerSynergy.Count;
+        Debug.Log("run");
         for (int i = 0; i < count; i++) {
             Transform clone = Instantiate(throwableCoworker).transform;
             clone.position = transform.position;
@@ -109,8 +111,9 @@ public class PlayerUI : MonoBehaviour
             Sprite followerSprite = currentFollower.sprite;
             clone.GetComponent<SpriteRenderer>().sprite = followerSprite;
             float damage = currentFollower.attackDamage;
-            AttackCoworker(damage);
-            if (coworker == null) {yield break;}
+            if (coworker != null) {
+                AttackCoworker(damage);
+            }
 
             float displaceX = Random.Range(0, maxThrowDisplacement);
             float displaceY = Random.Range(0, maxThrowDisplacement);
@@ -119,11 +122,14 @@ public class PlayerUI : MonoBehaviour
 
             Vector2 force = diretion * Random.Range(minForceStregth,maxForceStrength);
             body.AddForceAtPosition(force, throwPosition, ForceMode2D.Impulse);
+            body.angularVelocity = Random.Range(-maxTorque, maxTorque);
 
             float waitTime = Random.Range(0, maxWaitBetweenThrows);
             yield return new WaitForSeconds(waitTime);
         }
-        AttackCoworker(playerDamage);
+        if (coworker != null) {
+            AttackCoworker(playerDamage);
+        }
 
     }
 
