@@ -13,6 +13,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI choice1Text;
     TextMeshProUGUI choice2Text;
     TextMeshProUGUI choice3Text;
+    
 
     /// FOR UI TRANSITION ///
     [SerializeField] GameObject dialogueBox;
@@ -23,13 +24,14 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject choice3Box;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
-    [SerializeField] CanvasGroup dialogueCanvasGroup;
+    [SerializeField] CanvasGroup dialogueCanvasGroup; // new
 
 
 
     RectTransform dialogBox;
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
+    [SerializeField] TextMeshProUGUI enemyMaxHealthText; // new
     [SerializeField] Image enemyPortrait; 
     Image playerPortrait;
     [SerializeField] GameObject throwableCoworker;
@@ -155,7 +157,8 @@ public class PlayerUI : MonoBehaviour
     void updateEnemyHealthUI() {
         float enemyMaxHealth = coworker.getMaxHealth();
         float enemyHealth = coworker.getHealth();
-        enemyHealthText.text = (enemyMaxHealth - enemyHealth) + "/" + enemyMaxHealth;
+        enemyHealthText.text = (enemyHealth).ToString();
+        enemyMaxHealthText.text = "---- " + enemyMaxHealth.ToString();
     }
     public void TakeDamage() {
         float value = coworker.attackDamage;
