@@ -18,6 +18,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] TextMeshProUGUI enemyHealthText;
     [SerializeField] Image enemyPortrait; 
+    Image playerPortrait;
     [SerializeField] GameObject throwableCoworker;
     [SerializeField] Rigidbody2D body;
     [SerializeField] new BoxCollider2D collider;
@@ -43,6 +44,7 @@ public class PlayerUI : MonoBehaviour
         choice3Text = choice3Button.GetComponentInChildren<TextMeshProUGUI>();
 
         dialogBox = (RectTransform)UI.transform.Find("DialogueBox");
+        playerPortrait = UI.transform.Find("PlayerPortrait").GetComponent<Image>();
 
     }
 
@@ -97,6 +99,40 @@ public class PlayerUI : MonoBehaviour
 
     }
 
+    IEnumerator shakePortrait(bool shakePlayer) {
+        const float animationDuration = 0.2f;
+        const float minShakeStrength = 250f;
+        const float maxShakeStrength = 300;
+        Vector2 shakeDirection = new Vector2(1,Random.Range(-1f,0)).normalized;
+        float animationTimer = animationDuration;
+
+        RectTransform portrait;
+        if (shakePlayer) {
+            portrait = playerPortrait.rectTransform;
+            shakeDirection = new Vector2(-shakeDirection.x,shakeDirection.y);
+        }
+        else {
+            portrait = enemyPortrait.rectTransform;
+        }
+
+        Vector2 originalPos = portrait.position;
+        float shakeStrength = Random.Range(minShakeStrength, maxShakeStrength);
+
+        while (animationTimer > 0) {
+            float dt = Time.deltaTime;
+
+            Vector2 shakeAmount = shakeDirection * shakeStrength * dt;
+            shakeAmount = animationTimer > animationDuration/2? shakeAmount: -shakeAmount;
+            portrait.Translate(shakeAmount);
+
+            animationTimer -= dt;
+            yield return new WaitForFixedUpdate();
+        }
+
+        portrait.position = originalPos;
+
+    }
+
     void updateHealthUI() {
         healthText.text = currentHealth + "/" + maxHealth;
     }
@@ -109,6 +145,7 @@ public class PlayerUI : MonoBehaviour
     public void TakeDamage() {
         float value = coworker.attackDamage;
 
+        StartCoroutine(shakePortrait(true));
         currentHealth -= value;
         updateHealthUI();
         if (currentHealth < 0) {
@@ -196,15 +233,20 @@ public class PlayerUI : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
         }
         if (coworker != null) {
-            AttackCoworker(playerDamage);
+            AttackCoworker(playerDamage, true);
         }
 
     }
 
 
-    void AttackCoworker(float damage) {
+    void AttackCoworker(float damage, bool playAnimation=false) {
         bool isDead = coworker.Damage(damage);
         updateEnemyHealthUI();
+        
+        if (playAnimation) {
+            StartCoroutine(shakePortrait(false));
+        }
+
         if (isDead) {
             EndInteraction();
         }
