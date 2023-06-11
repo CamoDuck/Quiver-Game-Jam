@@ -23,7 +23,6 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject choice1Box;
     [SerializeField] GameObject choice2Box;
     [SerializeField] GameObject choice3Box;
-    [SerializeField] GameObject healthBox;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
     [SerializeField] CanvasGroup dialogueCanvasGroup; // new
@@ -354,7 +353,6 @@ public class PlayerUI : MonoBehaviour
         StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.0f));
         StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.05f));
         StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.25f));
-        StartCoroutine(MoveToDesiredPosition(healthBox, 0.05f));
         StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.25f));
         StartCoroutine(MoveToDesiredPosition(choice1Box, 0.7f));
         StartCoroutine(MoveToDesiredPosition(choice2Box, 0.85f));
