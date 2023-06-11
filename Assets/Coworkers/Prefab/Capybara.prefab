@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6593895382137241223}
   - component: {fileID: 7970385166677899847}
   - component: {fileID: 4196773624918766061}
-  - component: {fileID: 7007565808206178187}
+  - component: {fileID: 248207739}
   m_Layer: 0
   m_Name: Capybara
   m_TagString: Coworker
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3785310841626892458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.63, y: 7.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -52,8 +52,11 @@ MonoBehaviour:
   followTarget: {fileID: 0}
   followSpeed: 10
   followDistance: 1
-  portrait: []
-  coworkerName: Hippo
+  portrait:
+  - {fileID: 21300000, guid: f9c0fe90145044b46a68d9121f92f70b, type: 3}
+  - {fileID: 21300000, guid: 0f2e07cf843b42b4ea38b6c2ae2ed9aa, type: 3}
+  - {fileID: 21300000, guid: a89070d612ff88d4f83c2799dde65a68, type: 3}
+  coworkerName: Capybara
   maxHealth: 10
   sprite: {fileID: 0}
   attackDamage: 2
@@ -99,7 +102,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1740163448, guid: e1ddfe5dfc63e5942a7d8864dee3e825, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,7 +130,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -157,7 +160,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &7007565808206178187
+--- !u!95 &248207739
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

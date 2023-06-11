@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6593895382137241223}
   - component: {fileID: 7970385166677899847}
   - component: {fileID: 4196773624918766061}
+  - component: {fileID: 248207739}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Coworker
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3785310841626892458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.63, y: 7.25, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,8 +52,11 @@ MonoBehaviour:
   followTarget: {fileID: 0}
   followSpeed: 10
   followDistance: 1
-  portrait: []
-  coworkerName: Hippo
+  portrait:
+  - {fileID: 21300000, guid: 98d76cf09b6af7d4b98c451203c292fc, type: 3}
+  - {fileID: 21300000, guid: bcee2a1b86a748744832447acfbb2150, type: 3}
+  - {fileID: 21300000, guid: 6685445311efb724ca003e4791f42d01, type: 3}
+  coworkerName: Mouse
   maxHealth: 10
   sprite: {fileID: 0}
   attackDamage: 2
@@ -98,7 +102,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1267410456, guid: 8c6339ad116b36a41b79511cab8349b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,7 +130,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -156,3 +160,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &248207739
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785310841626892458}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fff64d08709e5df4db8ef9261133c60b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
