@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6587531145506507265}
   - component: {fileID: 5108733778701538472}
-  - component: {fileID: 6925638296287465134}
+  - component: {fileID: 2827154443967588336}
   m_Layer: 0
   m_Name: Coffee
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6925638296287465134
+--- !u!95 &2827154443967588336
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
