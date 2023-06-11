@@ -21,7 +21,6 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject choice1Box;
     [SerializeField] GameObject choice2Box;
     [SerializeField] GameObject choice3Box;
-    [SerializeField] GameObject healthBox;
     [SerializeField] GameObject enemyHealthBox;
     [SerializeField] GameObject fadeOverlay;
 
@@ -48,7 +47,7 @@ public class PlayerUI : MonoBehaviour
     float currentHealth;
 
     void Start() {
-        currentHealth = maxHealth;
+        currentHealth = 0;
 
         choice1Button = (RectTransform)UI.transform.Find("Choice1");
         choice2Button = (RectTransform)UI.transform.Find("Choice2");
@@ -108,9 +107,9 @@ public class PlayerUI : MonoBehaviour
 
         button.eulerAngles = originalRotation;
         button.localScale = originalScale;
-        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.0f));
-        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.15f));
-        StartCoroutine(MoveToDesiredPosition(choice3Box, 0.3f));
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.0f, 1f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.15f, 1f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 0.3f, 1f));
         choice1Button.gameObject.SetActive(true);
         choice2Button.gameObject.SetActive(true);
         choice3Button.gameObject.SetActive(true);
@@ -152,7 +151,7 @@ public class PlayerUI : MonoBehaviour
     }
 
     void updateHealthUI() {
-        healthText.text = (maxHealth - currentHealth) + "/" + maxHealth;
+        healthText.text = (currentHealth).ToString();
     }
 
     void updateEnemyHealthUI() {
@@ -164,9 +163,9 @@ public class PlayerUI : MonoBehaviour
         float value = coworker.attackDamage;
 
         StartCoroutine(shakePortrait(true));
-        currentHealth -= value;
+        currentHealth += value;
         updateHealthUI();
-        if (currentHealth < 0) {
+        if (currentHealth >= 100) {
             Death();
         } 
     }
@@ -318,20 +317,19 @@ public class PlayerUI : MonoBehaviour
         updateEnemyHealthUI();
         updateEnemyPortrait(Reaction.Happy);
         updateChoices();
-        StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.0f));
-        StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.05f));
-        StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.25f));
-        StartCoroutine(MoveToDesiredPosition(healthBox, 0.05f));
-        StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.25f));
-        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.7f));
-        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.85f));
-        StartCoroutine(MoveToDesiredPosition(choice3Box, 1.0f));
-        //fadeOverlay.gameObject.SetActive(true);
+        StartCoroutine(MoveToDesiredPosition(fadeOverlay, 0.0f, 1f));
+        StartCoroutine(MoveToDesiredPosition(dialogueBox, 0.1f, 1f));      
+        StartCoroutine(MoveToDesiredPosition(playerPortraitMove, 0.15f, 1f));
+        StartCoroutine(MoveToDesiredPosition(enemyPortraitMove, 0.35f, 1f));
+        StartCoroutine(MoveToDesiredPosition(enemyHealthBox, 0.35f, 1f));
+        StartCoroutine(MoveToDesiredPosition(choice1Box, 0.8f, 1f));
+        StartCoroutine(MoveToDesiredPosition(choice2Box, 0.95f, 1f));
+        StartCoroutine(MoveToDesiredPosition(choice3Box, 1.1f, 1f));
         UI.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.8f);
     }
 
-    IEnumerator MoveToDesiredPosition(GameObject obj, float delay)
+    IEnumerator MoveToDesiredPosition(GameObject obj, float delay, float speed)
     {
         Vector2 desiredPos = new Vector2(obj.GetComponent<RectTransform>().anchoredPosition.x, obj.GetComponent<RectTransform>().anchoredPosition.y);
 
@@ -339,7 +337,7 @@ public class PlayerUI : MonoBehaviour
         yield return new WaitForSeconds(delay);
         while (obj.GetComponent<RectTransform>().anchoredPosition.y < (desiredPos.y - 4))
         {
-            Vector2 interpolatedPosition = Vector2.Lerp(obj.GetComponent<RectTransform>().anchoredPosition, desiredPos, Time.deltaTime * 7.0f);
+            Vector2 interpolatedPosition = Vector2.Lerp(obj.GetComponent<RectTransform>().anchoredPosition, desiredPos, Time.deltaTime * 7.0f * speed);
             obj.GetComponent<RectTransform>().anchoredPosition = interpolatedPosition; ;
             yield return new WaitForEndOfFrame();
         }
