@@ -25,9 +25,9 @@ public class BaseCoworker : MonoBehaviour
     protected DialogChoices[] happy;
     protected DialogChoices[] sad;
 
-    protected DialogChoices[] jokeR;
-    protected DialogChoices[] happyR;
-    protected DialogChoices[] sadR;
+    public DialogChoices[] jokeR;
+    public DialogChoices[] happyR;
+    public DialogChoices[] sadR;
 
     //ANIMATIONS//
     //References 
