@@ -9,7 +9,7 @@ public class Dog : BaseCoworker
         joke = new DialogChoices[] {
 			new DialogChoices("What does a dog and a phone have in common?... They both have collar ID."),
 			new DialogChoices("Work must be ruff init?"),
-			new DialogChoices("You are an amazing ,manager! You deserve a round of a-paws!")
+			new DialogChoices("You are an amazing, manager! You deserve a round of a-paws!")
 		};
 		sad = new DialogChoices[] {
 			new DialogChoices("Our customers might have a bone to pick with us."),
