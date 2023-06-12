@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442154719257767340}
-  - component: {fileID: 1681344022341786873}
   - component: {fileID: 6593895382137241223}
   - component: {fileID: 7970385166677899847}
   - component: {fileID: 4196773624918766061}
   - component: {fileID: 248207739}
+  - component: {fileID: 5296417195551565124}
   m_Layer: 0
   m_Name: Mouse
   m_TagString: Coworker
@@ -36,31 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1681344022341786873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3785310841626892458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be343bd74c245c7418996f210301a094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  body: {fileID: 4196773624918766061}
-  followTarget: {fileID: 0}
-  followSpeed: 10
-  followDistance: 1
-  portrait:
-  - {fileID: 21300000, guid: 98d76cf09b6af7d4b98c451203c292fc, type: 3}
-  - {fileID: 21300000, guid: bcee2a1b86a748744832447acfbb2150, type: 3}
-  - {fileID: 21300000, guid: 6685445311efb724ca003e4791f42d01, type: 3}
-  coworkerName: Mouse
-  maxHealth: 10
-  sprite: {fileID: 0}
-  attackDamage: 2
-  reactionType: 3
 --- !u!212 &6593895382137241223
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -181,3 +156,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5296417195551565124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785310841626892458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f533200236ab271429216d2eca25e019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 4196773624918766061}
+  followTarget: {fileID: 0}
+  followSpeed: 10
+  followDistance: 1
+  portrait:
+  - {fileID: 21300000, guid: 98d76cf09b6af7d4b98c451203c292fc, type: 3}
+  - {fileID: 21300000, guid: bcee2a1b86a748744832447acfbb2150, type: 3}
+  - {fileID: 21300000, guid: 6685445311efb724ca003e4791f42d01, type: 3}
+  coworkerName: Mouse
+  maxHealth: 10
+  sprite: {fileID: 0}
+  attackDamage: 2
+  reactionType: 3
