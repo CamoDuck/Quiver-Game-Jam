@@ -12,6 +12,7 @@ public class MainMenuScript : MonoBehaviour
     public Image titleScreen;
     public Image cutscene1;
     public Image cutscene2;
+    public Image noPeeking;
 
 
 
@@ -79,6 +80,7 @@ public class MainMenuScript : MonoBehaviour
         while (cutscene2.color.a > 0)
         {
             cutscene2.color = new Color(cutscene2.color.r, cutscene2.color.g, cutscene2.color.b, cutscene2.color.a - 0.05f);
+            noPeeking.color = new Color(noPeeking.color.r, noPeeking.color.g, noPeeking.color.b, noPeeking.color.a - 0.05f);
             yield return new WaitForSeconds(0.025f);
         }
 
