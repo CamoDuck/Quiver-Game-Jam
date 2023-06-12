@@ -50,6 +50,8 @@ public class FishGame : MonoBehaviour
             timer -= waitTime;
         }
 
+        yield return new WaitForSeconds(1f);
+
         dialogText.text = "You caught " + catchCount + " fish!";
         dialogBox.SetActive(true);
 
