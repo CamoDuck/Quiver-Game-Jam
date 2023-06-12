@@ -415,15 +415,20 @@ public class PlayerUI : MonoBehaviour
         Reaction reactionType = (Reaction) Random.Range(0,3);
         coworker.setReactionType(reactionType);
 
+        int randIndex;
+
         switch (reactionType) {
             case Reaction.Joke:
-                dialogTextbox.text = "They are laughing at a meme on their phone...";
+                randIndex = Random.Range(0,coworker.jokeR.Length);
+                dialogTextbox.text = coworker.jokeR[randIndex].text;
                 break;
             case Reaction.Happy:
-                dialogTextbox.text = "They are humming to themselves..";
+                randIndex = Random.Range(0,coworker.happyR.Length);
+                dialogTextbox.text = coworker.happyR[randIndex].text;
                 break;
             case Reaction.Sad:
-                dialogTextbox.text = "They are on the verge of tears...";
+                randIndex = Random.Range(0,coworker.sadR.Length);
+                dialogTextbox.text = coworker.sadR[randIndex].text;
                 break;
         }
     }
