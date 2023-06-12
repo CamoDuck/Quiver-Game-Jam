@@ -19,6 +19,25 @@ public class Capybara : BaseCoworker
 			new DialogChoices("I heard you were being considered for Emploee of the Month"),
 			new DialogChoices("You always have original ideas. I guess Capybaras are not Copycats.")
 		};
-    }
+
+
+		jokeR = new DialogChoices[] {
+			new DialogChoices("This Capybara employee is nodding in response to someone's cheerful laugh"),
+			new DialogChoices("Capybara has a slight grin"),
+			new DialogChoices("Capybara has a slighter grin.")
+		};
+
+		happyR = new DialogChoices[] {
+			new DialogChoices("Capybara is in the midst of another conversation. Their face is as blank as it gets."),
+			new DialogChoices("Capybara is chilling!"),
+			new DialogChoices("Capybara is absorbing the good vibes")
+		};
+
+		sadR = new DialogChoices[] {
+			new DialogChoices("Capybara is slowly moving through the crowd. Their step is heavy, posture slouched, paws hidden in the pockets."),
+			new DialogChoices("Capybara is contemplating about the horrors of the world."),
+			new DialogChoices("Capybara is thinking about pulling up.")
+		};
+	}
     
 }
