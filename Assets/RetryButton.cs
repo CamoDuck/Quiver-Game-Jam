@@ -22,6 +22,6 @@ public class RetryButton : MonoBehaviour
     }
 
     public void LoadGame() {
-        SceneManager.LoadScene("Level35.7");
+        SceneManager.LoadScene("Level35.5");
     }
 }
