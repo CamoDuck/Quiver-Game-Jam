@@ -94,7 +94,7 @@ public class BaseCoworker : MonoBehaviour
     }
 
     // called when coworker is defeated in verbal battle
-    void Death() {
+    protected virtual void Death() {
         gameObject.tag = "Follower";
     }
 

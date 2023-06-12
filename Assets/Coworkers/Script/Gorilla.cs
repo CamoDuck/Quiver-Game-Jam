@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Gorilla : BaseCoworker
 {
@@ -21,5 +22,8 @@ public class Gorilla : BaseCoworker
 			
 		};
     }
-    
+
+	override protected void Death(){
+		SceneManager.LoadScene("Level35.5");
+	}
 }

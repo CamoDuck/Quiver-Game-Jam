@@ -36803,6 +36803,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3058258362010705398, guid: 98bba592c2f51e248a19d5ff388e1112, type: 3}
+      propertyPath: maxHealth
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 3785310841626892458, guid: 98bba592c2f51e248a19d5ff388e1112, type: 3}
       propertyPath: m_Name
       value: Gorilla
