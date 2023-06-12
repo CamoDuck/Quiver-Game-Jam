@@ -16,6 +16,7 @@ public class BaseCoworker : MonoBehaviour
     public Sprite sprite;
     [SerializeField] public float attackDamage;
     [SerializeField] protected Reaction reactionType;
+    [SerializeField] GameObject player;
 
 
     /// VARYING ///
@@ -36,6 +37,7 @@ public class BaseCoworker : MonoBehaviour
         am = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         sprite = GetComponent<SpriteRenderer>().sprite;
+        player = GameObject.Find("Player");
     }
 
     void FixedUpdate() {
@@ -58,6 +60,7 @@ public class BaseCoworker : MonoBehaviour
         }
         else
         {
+            SpriteDirectionChecker();
             // am.SetBool("Move", false);
         }
     }
@@ -106,7 +109,7 @@ public class BaseCoworker : MonoBehaviour
     }
     void SpriteDirectionChecker()
     {
-        if (body.velocity.x < 0)
+        if (player.transform.position.x - transform.position.x < 0)
         {
             sr.flipX = true;
         }
