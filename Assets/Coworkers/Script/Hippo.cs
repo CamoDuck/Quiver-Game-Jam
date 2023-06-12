@@ -19,6 +19,8 @@ public class Hippo : BaseCoworker
 			new DialogChoices("The market is really changing right now. Thoughts?"),
 			new DialogChoices("Thanks for buying us a new coffee machine for the cafeteria!"),
 			new DialogChoices("Maybe our salaries will increase too. Wink wink ;)")	
+
+
 		};
 
 

@@ -24,6 +24,25 @@ public class Mouse : BaseCoworker
 			new DialogChoices("I'm rooting for you! :)"),
 			new DialogChoices("They didn't offer me much cheddar when I was an intern, but it was a good start for me.")
 		};
-    }
+
+		jokeR = new DialogChoices[] {
+			new DialogChoices("The Mouse is vibrating with excitement, they are bouncy on their feet and seem to be having a good time."),
+			new DialogChoices("Mouse is looking at an online video."),
+			new DialogChoices("Mouse loves comedy!")
+		};
+
+		happyR = new DialogChoices[] {
+			new DialogChoices("Mouse is thinking about delicious cheese."),
+			new DialogChoices("Mouse is cheesed to meet you!"),
+			new DialogChoices("Mouse is happy!")
+		};
+
+		sadR = new DialogChoices[] {
+			new DialogChoices("This is this Mouse's first networking event. They must be nervous about talking to their seniors. Just look at them fidgeting."),
+			new DialogChoices("Mouse notices you’re a cat and is scared."),
+			new DialogChoices("Mouse is sniffling their nose.")
+		};
+
+	}
     
 }
